@@ -34,14 +34,12 @@ const App = {
       // get accounts
       const accounts = await web3.eth.getAccounts();
       this.account = accounts[0];
-      // const personal = new Personal(
-      //   'http://127.0.0.1:8545',
-      //   this.account,
-      // );
+      // $('#status').html(accounts);
+
+      //get block number & present
       web3.eth.getBlockNumber(function (error, num){if (!error) {blockNumber = num;}});
       this.viewBalance();
       this.allBlock();
-      // $("#status").html(web3.defaultAccount);
 
       // web3.eth.getBalance(this.account, (err, balance) => {
       //   if (err) return;
@@ -93,11 +91,10 @@ const App = {
 
   setDays: async function() {
     try {
-      const { web3 } = this;
       const { setDays } = this.meta.methods;
       const { getDays } = this.meta.methods;
       var days = parseInt($("#days").val());
-      web3.eth.personal.unlockAccount(this.account, '123456').then(console.log('unlocked!'));
+      // web3.eth.personal.unlockAccount(this.account, '123456', 100, function(err, object){if (!err){$('#status').html('unlocked!')}});
       await setDays(days).send({ from: this.account });
       var viewDays = await getDays().call();
       $("#viewDays").html(viewDays);
@@ -112,8 +109,6 @@ const App = {
       const { sendToContract } = this.meta.methods;
       await sendToContract().send({from: this.account, value: web3.utils.toWei('1', 'ether')});
       this.viewBalance();
-      // await sendToContract.sendTransaction({from: this.account, value: web3.utils.toWei('1', 'ether'), to: "0x38B0D0B614AC14FaB5e92f8b918Fa6aA68AF1c44"});
-      // 0xA6d21556c9DD6B00c2CEC9c8A2f53993bFA48003
       $("#contractStatus").html('success');
     } catch (error) {
       $("#contractStatus").html('error');
@@ -134,15 +129,22 @@ const App = {
   // Contract Resale
   setSeller: async function() {
     try {
-      const { web3 } = this;
       const { setSeller } = this.resale.methods;
-      const { setPlatform } = this.resale.methods;
-      var seller = $("#seller").val();
+      var seller = $('#seller').val();
       await setSeller(seller).send({ from: this.account });
-      await setPlatform('0x71b50f3c3fe9b5701cab53487330b91c1a9c816a').send({ from: this.account });
-      $("#viewSeller").html(seller);
+      $('#viewSeller').html(seller);
     } catch (error) {
-      $("#viewSeller").html('error');
+      console.log('error');
+    }
+  },
+
+  setPlatform: async function() {
+    try {
+      const { setPlatform } = this.resale.methods;
+      var platform = '0x71b50f3c3fe9b5701cab53487330b91c1a9c816a';
+      await setPlatform(platform).send({ from: this.account });
+    } catch (error) {
+      console.log(error);
     }
   },
 

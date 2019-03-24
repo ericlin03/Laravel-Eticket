@@ -16,6 +16,7 @@
     <label id="viewSeller">seller:</label>
     <input type="text" id="seller" placeholder="e.g. 95" />
     <button onclick="App.setSeller()">Set seller</button>
+    <button onclick="App.setPlatform()">Set Platform</button>
 
     <p><label id="viewAmount">amount:</label></p>
     <input type="text" id="amount" placeholder="e.g. 95" />
@@ -25,7 +26,7 @@
 
     <p id="status">status</p>
 
-    <p><button onclick="App.setSeller();App.setAmount()">Set All parameters</button></p>
+    <p><button onclick="App.setSeller();App.setAmount();App.setPlatform()">Set All parameters</button></p>
     <script src="./dist/js/index.js"></script>
 
     <a href="./index">go to index</a>
