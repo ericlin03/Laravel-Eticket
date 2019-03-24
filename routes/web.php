@@ -42,3 +42,7 @@ Route::get('/index',function(){
 Route::get('/resale',function(){
   return view('resale');
 });
+
+Route::get('/view',function(){
+  return view('view');
+});
