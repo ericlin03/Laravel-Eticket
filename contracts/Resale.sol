@@ -4,7 +4,7 @@ contract Resale {
     
     address payable seller;
     address payable buyer;
-    address payable platform;
+    address payable public platform = 0x4190C332e7D40bF2E7A370Bbc836F5b8832CB326;
     uint originalPrice;
 
     constructor() public {
@@ -17,9 +17,9 @@ contract Resale {
     }
 
     // 售票平台地址（之後為定數）
-    function setPlatform(address payable _platform) public {
-        platform = _platform;
-    }
+    // function setPlatform(address payable _platform) public {
+    //     platform = _platform;
+    // }
 
     // 設定原票價金額
     function setAmount(uint _originalPrice) public {
