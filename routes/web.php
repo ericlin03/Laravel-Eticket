@@ -46,3 +46,18 @@ Route::get('/resale',function(){
 Route::get('/view',function(){
   return view('view');
 });
+
+Route::get('/resale-index', function(){
+  return view('resale-index');
+});
+
+Route::get('/allactivity','Controller@allactivity');
+
+
+Route::get('/aboutus',function(){
+  return view('aboutus');
+});
+
+Route::get('/payment-step1', 'HomeController@pay');
+
+Route::get('/payment-step2', 'HomeController@pay2');

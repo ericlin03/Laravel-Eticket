@@ -7,7 +7,7 @@
 <div class="col-12">
 @foreach($act as $program)
 
-  <img src="{{$program->img }}" height="300"style="display:block; margin:auto;">
+  <img src="{{$program->img }}" height="300" style="display:block; margin:auto;">
  
 @endforeach
 </div>
@@ -38,30 +38,64 @@
 <tr>
   @foreach($area as $area)
 　<td align="center">{{$area->type}}</td>
-　<td align="center" >{{$area->tick_area}}</td>
+　<td align="center" >不分區隨機挑選</td>
 　<td align="center">{{$area->tick_price}}</td>  
-  <td align="right">
-  <form>
-  <div>
-    <div class="col-auto ">
-      <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-      <select class="custom-select mr-sm-2" id="ticketquantity">
-        <option selected>選擇張數</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="3">4</option>
-      </select>
-    </div>
-  </div>
-</form>
-  </td>
 　</tr>
 @endforeach
 <br>
 </table>
+<br>
+<hr>
+<form action="store" method="POST">
+@csrf
+<div class="form-group row">
+                            <label for="identity" class="col-md-4 col-form-label text-md-right">{{ __('身分證字號') }}</label>
 
- 
+                            <div class="col-md-6">
+                                <input id="identity" type="text" class="form-control{{ $errors->has('identity') ? ' is-invalid' : '' }}" name='identity' value="{{ Auth::user()->identity }}" required autofocus disabled="disabled">
+
+                                @if ($errors->has('identity'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('identity') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="wallet" class="col-md-4 col-form-label text-md-right">{{ __('電子錢包') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="wallet" type="text" class="form-control{{ $errors->has('wallet') ? ' is-invalid' : '' }}" name='wallet' value=" {{ Auth::user()->wallet}} " required autofocus disabled="disabled">
+
+                                @if ($errors->has('wallet'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('wallet') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                        <label for="wallet" class="col-md-4 col-form-label text-md-right">{{ __('選擇張數') }}</label>
+                        <div class="col-md-6">
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <option selected>選擇張數</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        </select>
+                        </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                   進行付款
+                                </button>
+                            </div>
+                        </div>
+</form>
+
+
 
 
 </div>
@@ -116,3 +150,5 @@
     </footer>  
     </div>
 @endsection
+
+<script src="./dist/js/index.js"></script>
