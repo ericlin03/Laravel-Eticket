@@ -1,6 +1,7 @@
 import Web3 from "../../node_modules/web3";
 import eticketArtifact from "../../build/contracts/Eticket.json";
 import resaleArtifact from "../../build/contracts/Resale.json";
+import buyTicketArtifact from "../../build/contracts/BuyTicket.json";
 // import {Personal} from 'web3-eth-personal';
 // import { once } from "cluster";
 
@@ -11,6 +12,7 @@ const App = {
   account: null,
   meta: null,
   resale: null,
+  buyTicket: null,
 
   start: async function() {
     const { web3 } = this;
@@ -18,6 +20,7 @@ const App = {
     try {
       // get contract instance
       const networkId = await web3.eth.net.getId();
+
       const deployedNetwork = eticketArtifact.networks[networkId];
       this.meta = new web3.eth.Contract(
         eticketArtifact.abi,
@@ -28,6 +31,12 @@ const App = {
       this.resale = new web3.eth.Contract(
         resaleArtifact.abi,
         deployResale.address,
+      );
+
+      const deployBuyTicket = buyTicketArtifact.networks[networkId];
+      this.buyTicket = new web3.eth.Contract(
+        buyTicketArtifact.abi,
+        deployBuyTicket.address,
       );
 
 
@@ -58,7 +67,25 @@ const App = {
       // );
     } catch (error) {
       // console.error("Could not connect to contract or chain.");
-      $("#status").html("start error");
+      console.log(error);
+    }
+  },
+
+  // Contract BuyTicket
+  buy: async function() {
+    try {
+      const { web3 } = this;
+      const { buyTicket } = this.buyTicket.methods;
+      var amount = parseInt($("#amount").text());
+      var value = amount.toString();
+      if (this.account == $('#userAddress').text()){
+        await buyTicket(amount).send({ from: this.account, value: web3.utils.toWei(value, 'ether')});
+        alert('付款成功')
+      } else {
+        alert('錢包地址與個人資料不相符');
+      }      
+    } catch(error) {
+      console.log(error);
     }
   },
 
@@ -138,15 +165,15 @@ const App = {
     }
   },
 
-  setPlatform: async function() {
-    try {
-      const { setPlatform } = this.resale.methods;
-      var platform = '0x71b50f3c3fe9b5701cab53487330b91c1a9c816a';
-      await setPlatform(platform).send({ from: this.account });
-    } catch (error) {
-      console.log(error);
-    }
-  },
+  // setPlatform: async function() {
+  //   try {
+  //     const { setPlatform } = this.resale.methods;
+  //     var platform = '0x71b50f3c3fe9b5701cab53487330b91c1a9c816a';
+  //     await setPlatform(platform).send({ from: this.account });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // },
 
   setAmount: async function() {
     try {
@@ -170,7 +197,8 @@ const App = {
       $("#status").html('error');
     }
   },
-
+  
+  //web3 function for view.blade.php
   allBlock: async function() {
     try {
       $('#allBlockBody').empty();

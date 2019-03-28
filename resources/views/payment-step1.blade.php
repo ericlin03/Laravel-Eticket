@@ -15,7 +15,7 @@
     <a class="nav-link active" data-toggle="tab" href="#home">確認票卷</a>
   </li>
   <li class="col-4">
-    <a class="nav-link disabled" data-toggle="tab" href="#menu1">付款流程</a>
+    <a class="nav-link disabled" data-toggle="tab" href="#menu1">付款方式</a>
   </li>
   <li class="col-4">
     <a class="nav-link disabled" data-toggle="tab" href="#menu2">購票完成</a>
