@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 use DB;
 use Auth;
 
@@ -63,13 +64,22 @@ class HomeController extends Controller
         return view('payment-step1',compact('act','area'));
     }
 
-    public function pay2(){
+    public function pay2(Request $request){
+        $this->middleware('auth');
+        $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
+        $area = DB::select('select tick_price, type, owner_id from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
+        $user = Auth::user();
+        $wallet = $user->wallet;
+        return view('payment-step2',compact('act','area', 'wallet'));
+    }
+
+    public function pay3(){
         $this->middleware('auth');
         $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
         $area = DB::select('select tick_price, type from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
         $user = Auth::user();
         $wallet = $user->wallet;
-        return view('payment-step2',compact('act','area'));
+        return view('payment-step3',compact('act','area'));
     }
 
 
@@ -80,6 +90,17 @@ class HomeController extends Controller
         $id = $user->identity;
         $order = DB::select('select * from program_seat where owner_id=:owner_id',['owner_id'=>$id]);
         return view('order',compact('order'));
+    }
+
+    public function updateOwner(){
+        // $this->middleware('auth');
+        // $user = Auth::user();
+        // $wallet = $user->wallet;
+        // $this->validate($request, ['wallet' => 'required']);
+        $area = DB::select('select tick_price, type, owner_id from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
+        $owner_id = input('wallet');
+        DB::update('update program_seat set owner_id = ? where ticket_id=1',[$owner_id]);
+        // $area.save();
     }
 
 

@@ -14,14 +14,14 @@
   <li class="col-4">
     <a class="nav-link" data-toggle="tab" href="#home">確認票卷</a>
   </li>
-  <li class="active col-4">
-    <a class="nav-link active" data-toggle="tab" href="#menu1">付款方式</a>
-  </li>
   <li class="col-4">
-    <a class="nav-link disabled" data-toggle="tab" href="#menu2">購票完成</a>
+    <a class="nav-link" data-toggle="tab" href="#menu1">付款方式</a>
+  </li>
+  <li class="active col-4">
+    <a class="nav-link active" data-toggle="tab" href="#menu2">購票完成</a>
   </li>
 </ul>
-    
+
 <div class="tab-content">
 <div id="home" class="tab-pane fade">
 <div class="card">
@@ -48,35 +48,23 @@
   @foreach($area as $area)
 　<td>{{$area->type}}</td>
 　<td>不分區隨機挑選</td>
-　<td>{{$area->tick_price}}</td>
+　<td>{{$area->tick_price}}</td>  
   @endforeach
 </tr>
 </table>
 </div>
-<div id="menu1" class="container tab-pane active">
-    <p id="amount">{{$area->tick_price}}</p>
-    @if(count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-        @foreach($errors->all() as $error)
-            <li>{{$error}}</li>
-        @endforeach
-        </ul>
-    </div>
-    @endif
-    <form method="post" action="{{action('HomeController@updateOwner')}}">
-        {{csrf_field()}}
-        <div class="form-group">
-            <input type="text" id="wallet" name="wallet" class="form-control" />
-        </div>
-    </form>
-    <button onclick="App.checkStatus()" class="btn btn-outline-primary">檢查錢包</button>
-    <button type="submit" class="btn btn-outline-danger" onclick="App.buy();App.jumpToStep3()">確認付款</button>
-    
-    <!-- <p id="wallet">0x71b50f3c3fe9B5701CAB53487330b91c1a9C816a</p> -->
-    <!-- <div align="center"><button type="submit" value="Edit" onclick="App.buy()" class="btn btn-outline-danger">確認付款</button></div> -->
+<div id="menu1" class="tab-pane fade">
+    <p id="amount">1</p>
+    <p id="userAddress">0x71b50f3c3fe9B5701CAB53487330b91c1a9C816a</p>
 </div>
-<div id="menu2" class="tab-pane fade"><h3><strong>請完成先前步驟</strong></h3></div>
+<div id="menu2" class="container tab-pane active" align="center">
+    <br><br>
+    <h3><strong>在 MetaMask 按下 'CONFIRM' 就完成付款囉！</strong></h3>
+    <br>
+    <h5>處理過程中需要等待，付款完成後票卷資訊會顯示在個人訂單中</h5>
+    <br><br>
+    <div align="center"><button class="btn btn-outline-info" onclick="javascript:location.replace('./home')">回首頁</button></div>
+</div>
 </div>
 </div>
 

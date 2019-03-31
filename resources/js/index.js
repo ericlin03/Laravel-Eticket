@@ -6,6 +6,7 @@ import buyTicketArtifact from "../../build/contracts/BuyTicket.json";
 // import { once } from "cluster";
 
 var blockNumber;
+var checkStatus = false;
 
 const App = {
   web3: null,
@@ -78,14 +79,30 @@ const App = {
       const { buyTicket } = this.buyTicket.methods;
       var amount = parseInt($("#amount").text());
       var value = amount.toString();
-      if (this.account == $('#userAddress').text()){
+      if (checkStatus == true){
         await buyTicket(amount).send({ from: this.account, value: web3.utils.toWei(value, 'ether')});
-        alert('付款成功')
-      } else {
-        alert('錢包地址與個人資料不相符');
-      }      
+        checkStatus = false;
+      } else if (checkStatus == false) {
+        alert('請確認填寫錢包位址與檢查');
+      }
     } catch(error) {
       console.log(error);
+    }
+  },
+  // .then(window.location.replace('./payment-step3')),
+
+  jumpToStep3: async function(){
+    if (checkStatus == true){
+      window.location.replace('./payment-step3');
+    } 
+  },
+
+  checkStatus: async function() {
+    if (this.account == $('#wallet').val()){
+      checkStatus = true;
+      alert('錢包位址正確！');
+    } else {
+      alert('錢包地址與個人資料不相符');
     }
   },
 

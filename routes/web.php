@@ -26,6 +26,7 @@ Route::get('/activity8', 'HomeController@activity8');
 Route::get('/problem',function(){
     return view('problem');
 });
+
 Route::get('/clause',function(){
   return view('clause');
 });
@@ -61,3 +62,8 @@ Route::get('/aboutus',function(){
 Route::get('/payment-step1', 'HomeController@pay');
 
 Route::get('/payment-step2', 'HomeController@pay2');
+
+Route::post('/payment-step2', 'HomeController@updateOwner');
+
+Route::get('/payment-step3', 'HomeController@pay3');
+

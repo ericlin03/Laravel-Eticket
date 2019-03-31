@@ -52,7 +52,7 @@
   @endforeach
 </tr>
 </table>
-<div align="center"><button type="button" class="btn btn-outline-danger"onclick="javascript:location.href='./payment-step2'">下一步</button></div>
+<div align="center"><button type="button" class="btn btn-outline-danger" onclick="javascript:location.href='./payment-step2'">下一步</button></div>
 </div>
 <div id="menu1" class="tab-pane fade"><h3><strong>請完成先前步驟</strong></h3></div>
 <div id="menu2" class="tab-pane fade"><h3><strong>請完成先前步驟</strong></h3></div>
