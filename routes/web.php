@@ -40,16 +40,12 @@ Route::get('/index',function(){
   return view('index');
 });
 
-Route::get('/resale',function(){
-  return view('resale');
-});
-
 Route::get('/view',function(){
   return view('view');
 });
 
-Route::get('/resale-index', function(){
-  return view('resale-index');
+Route::get('/resale-example', function(){
+  return view('resale-example');
 });
 
 Route::get('/allactivity','Controller@allactivity');
@@ -67,3 +63,10 @@ Route::post('/payment-step2', 'HomeController@updateOwner');
 
 Route::get('/payment-step3', 'HomeController@pay3');
 
+Route::get('/resale-step1', 'HomeController@resale');
+
+Route::get('/resale-step2', 'HomeController@resale2');
+
+Route::get('/orders', 'HomeController@orders');
+
+Route::get('/programs', 'HomeController@programs');

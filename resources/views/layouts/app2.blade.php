@@ -50,7 +50,7 @@
             <button class="btn btn-outline-primary my-2 my-sm-0 btn-sm" type="submit"><img src="images/search.png" width="30" height="30" class="d-inline-block align-top" alt=""></button>
                     </form>
                     <li class="nav-item active">
-                    <a class="nav-link ecolor bcl bcr" href="#2">　所有活動　<span class="sr-only">(current)</span></a>
+                    <a class="nav-link ecolor bcl bcr" href="/programs">　所有活動　<span class="sr-only">(current)</span></a>
                      </li>
                     <li class="nav-item active">
                     <a class="nav-link ecolor bcr" href="#">　最新公告　</a>
@@ -59,7 +59,7 @@
                      <a class="nav-link ecolor bcr" href="#">　二手票券　</a>
                     </li>
                     <li class="nav-item active white">
-                    <a class="nav-link ecolor bcr" href="#">　常見問題　</a>
+                    <a class="nav-link ecolor bcr" href="/problem">　常見問題　</a>
                      </li>
                     </ul>
 
@@ -91,7 +91,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('登出') }}
                                     </a>
-                                    <a class="dropdown-item" href="#">個人訂單 <span class="sr-only">(current)</span></a>
+                                    <a class="dropdown-item" href="/orders">個人訂單 <span class="sr-only">(current)</span></a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
