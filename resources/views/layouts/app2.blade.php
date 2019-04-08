@@ -53,10 +53,10 @@
                     <a class="nav-link ecolor bcl bcr" href="/programs">　所有活動　<span class="sr-only">(current)</span></a>
                      </li>
                     <li class="nav-item active">
-                    <a class="nav-link ecolor bcr" href="#">　最新公告　</a>
+                    <a class="nav-link ecolor bcr" href="/news">　最新公告　</a>
                     </li>
                     <li class="nav-item active">
-                     <a class="nav-link ecolor bcr" href="#">　二手票券　</a>
+                     <a class="nav-link ecolor bcr" href="/resale">　二手票券　</a>
                     </li>
                     <li class="nav-item active white">
                     <a class="nav-link ecolor bcr" href="/problem">　常見問題　</a>

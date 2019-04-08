@@ -68075,7 +68075,7 @@ var App = {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              if (this.account == $('#wallet').val()) {
+              if (this.account == $('#wallet').text()) {
                 _checkStatus = true;
                 alert('錢包位址正確！');
               } else {
@@ -68323,40 +68323,105 @@ var App = {
     return transferToOrganizer;
   }(),
   // Contract Resale
-  setSeller: function () {
-    var _setSeller = _asyncToGenerator(
+  checkResaleStatus: function () {
+    var _checkResaleStatus = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10() {
-      var _setSeller2, seller;
-
+      var status;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
         while (1) {
           switch (_context10.prev = _context10.next) {
             case 0:
-              _context10.prev = 0;
+              if (this.account == $('#wallet').text()) {
+                _checkStatus = true;
+                status = confirm('確定要購買此二手票卷嗎？');
+
+                if (status == true) {
+                  this.setAmount();
+                  this.setSeller();
+                  alert('請先在MetaMask中確認兩次交易後再按下確認付款！');
+                } else {
+                  alert('您已取消購買！');
+                  window.location.replace('./resale');
+                }
+              } else {
+                alert('錢包地址與個人資料不相符');
+              }
+
+            case 1:
+            case "end":
+              return _context10.stop();
+          }
+        }
+      }, _callee10, this);
+    }));
+
+    function checkResaleStatus() {
+      return _checkResaleStatus.apply(this, arguments);
+    }
+
+    return checkResaleStatus;
+  }(),
+  jumpToResaleStep3: function () {
+    var _jumpToResaleStep = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
+        while (1) {
+          switch (_context11.prev = _context11.next) {
+            case 0:
+              if (_checkStatus == true) {
+                window.location.replace('./resale-step3');
+              }
+
+            case 1:
+            case "end":
+              return _context11.stop();
+          }
+        }
+      }, _callee11);
+    }));
+
+    function jumpToResaleStep3() {
+      return _jumpToResaleStep.apply(this, arguments);
+    }
+
+    return jumpToResaleStep3;
+  }(),
+  setSeller: function () {
+    var _setSeller = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12() {
+      var _setSeller2, seller;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
+        while (1) {
+          switch (_context12.prev = _context12.next) {
+            case 0:
+              _context12.prev = 0;
               _setSeller2 = this.resale.methods.setSeller;
-              seller = $('#seller').val();
-              _context10.next = 5;
+              seller = $('#seller').text();
+              _context12.next = 5;
               return _setSeller2(seller).send({
                 from: this.account
               });
 
             case 5:
               $('#viewSeller').html(seller);
-              _context10.next = 11;
+              _context12.next = 11;
               break;
 
             case 8:
-              _context10.prev = 8;
-              _context10.t0 = _context10["catch"](0);
-              console.log('error');
+              _context12.prev = 8;
+              _context12.t0 = _context12["catch"](0);
+              console.log(_context12.t0);
 
             case 11:
             case "end":
-              return _context10.stop();
+              return _context12.stop();
           }
         }
-      }, _callee10, this, [[0, 8]]);
+      }, _callee12, this, [[0, 8]]);
     }));
 
     function setSeller() {
@@ -68377,37 +68442,37 @@ var App = {
   setAmount: function () {
     var _setAmount = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee13() {
       var _setAmount2, amount;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee13$(_context13) {
         while (1) {
-          switch (_context11.prev = _context11.next) {
+          switch (_context13.prev = _context13.next) {
             case 0:
-              _context11.prev = 0;
+              _context13.prev = 0;
               _setAmount2 = this.resale.methods.setAmount;
-              amount = parseInt($("#amount").val());
-              _context11.next = 5;
+              amount = parseInt($("#amount").text());
+              _context13.next = 5;
               return _setAmount2(amount).send({
                 from: this.account
               });
 
             case 5:
               $("#viewAmount").html(amount);
-              _context11.next = 11;
+              _context13.next = 11;
               break;
 
             case 8:
-              _context11.prev = 8;
-              _context11.t0 = _context11["catch"](0);
-              $("#viewAmount").html('error');
+              _context13.prev = 8;
+              _context13.t0 = _context13["catch"](0);
+              console.log(_context13.t0);
 
             case 11:
             case "end":
-              return _context11.stop();
+              return _context13.stop();
           }
         }
-      }, _callee11, this, [[0, 8]]);
+      }, _callee13, this, [[0, 8]]);
     }));
 
     function setAmount() {
@@ -68419,39 +68484,40 @@ var App = {
   transfer: function () {
     var _transfer = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee12() {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee14() {
       var web3, _transfer2, amount;
 
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee12$(_context12) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee14$(_context14) {
         while (1) {
-          switch (_context12.prev = _context12.next) {
+          switch (_context14.prev = _context14.next) {
             case 0:
-              _context12.prev = 0;
+              _context14.prev = 0;
               web3 = this.web3;
               _transfer2 = this.resale.methods.transfer;
-              amount = parseInt($("#amount").val()) * 11 / 10;
+              amount = parseInt($("#amount").text()) * 11 / 10;
               amount = amount.toString();
-              _context12.next = 7;
+              _context14.next = 7;
               return _transfer2().send({
                 from: this.account,
                 value: web3.utils.toWei(amount, 'ether')
               });
 
             case 7:
-              _context12.next = 12;
+              _checkStatus = false;
+              _context14.next = 13;
               break;
 
-            case 9:
-              _context12.prev = 9;
-              _context12.t0 = _context12["catch"](0);
-              $("#status").html('error');
+            case 10:
+              _context14.prev = 10;
+              _context14.t0 = _context14["catch"](0);
+              console.log(_context14.t0);
 
-            case 12:
+            case 13:
             case "end":
-              return _context12.stop();
+              return _context14.stop();
           }
         }
-      }, _callee12, this, [[0, 9]]);
+      }, _callee14, this, [[0, 10]]);
     }));
 
     function transfer() {
@@ -68464,11 +68530,11 @@ var App = {
   allBlock: function () {
     var _allBlock = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee13() {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee15() {
       var web3, i;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee13$(_context13) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee15$(_context15) {
         while (1) {
-          switch (_context13.prev = _context13.next) {
+          switch (_context15.prev = _context15.next) {
             case 0:
               try {
                 $('#allBlockBody').empty();
@@ -68487,10 +68553,10 @@ var App = {
 
             case 1:
             case "end":
-              return _context13.stop();
+              return _context15.stop();
           }
         }
-      }, _callee13, this);
+      }, _callee15, this);
     }));
 
     function allBlock() {
@@ -68502,11 +68568,11 @@ var App = {
   specificBlock: function () {
     var _specificBlock = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee14() {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee16() {
       var web3, blockNum;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee14$(_context14) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee16$(_context16) {
         while (1) {
-          switch (_context14.prev = _context14.next) {
+          switch (_context16.prev = _context16.next) {
             case 0:
               try {
                 web3 = this.web3;
@@ -68526,10 +68592,10 @@ var App = {
 
             case 1:
             case "end":
-              return _context14.stop();
+              return _context16.stop();
           }
         }
-      }, _callee14, this);
+      }, _callee16, this);
     }));
 
     function specificBlock() {
@@ -68541,11 +68607,11 @@ var App = {
   searchTx: function () {
     var _searchTx = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee15() {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee17() {
       var web3, txHash;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee15$(_context15) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee17$(_context17) {
         while (1) {
-          switch (_context15.prev = _context15.next) {
+          switch (_context17.prev = _context17.next) {
             case 0:
               try {
                 web3 = this.web3;
@@ -68567,10 +68633,10 @@ var App = {
 
             case 1:
             case "end":
-              return _context15.stop();
+              return _context17.stop();
           }
         }
-      }, _callee15, this);
+      }, _callee17, this);
     }));
 
     function searchTx() {

@@ -94,11 +94,11 @@ const App = {
   jumpToStep3: async function(){
     if (checkStatus == true){
       window.location.replace('./payment-step3');
-    } 
+    }
   },
 
   checkStatus: async function() {
-    if (this.account == $('#wallet').val()){
+    if (this.account == $('#wallet').text()){
       checkStatus = true;
       alert('錢包位址正確！');
     } else {
@@ -171,14 +171,37 @@ const App = {
   },
 
   // Contract Resale
+  checkResaleStatus: async function() {
+    if (this.account == $('#wallet').text()){
+      checkStatus = true;
+      var status = confirm('確定要購買此二手票卷嗎？');
+      if (status == true) {
+        this.setAmount();
+        this.setSeller();
+        alert('請先在MetaMask中確認兩次交易後再按下確認付款！');
+      } else {
+        alert('您已取消購買！');
+        window.location.replace('./resale');
+      }
+    } else {
+      alert('錢包地址與個人資料不相符');
+    }
+  },
+
+  jumpToResaleStep3: async function(){
+    if (checkStatus == true){
+      window.location.replace('./resale-step3');
+    }
+  },
+
   setSeller: async function() {
     try {
       const { setSeller } = this.resale.methods;
-      var seller = $('#seller').val();
+      var seller = $('#seller').text();
       await setSeller(seller).send({ from: this.account });
       $('#viewSeller').html(seller);
     } catch (error) {
-      console.log('error');
+      console.log(error);
     }
   },
 
@@ -195,11 +218,11 @@ const App = {
   setAmount: async function() {
     try {
       const { setAmount } = this.resale.methods;
-      var amount = parseInt($("#amount").val());
+      var amount = parseInt($("#amount").text());
       await setAmount(amount).send({ from: this.account });
       $("#viewAmount").html(amount);
     } catch (error) {
-      $("#viewAmount").html('error');
+      console.log(error);
     }
   },
 
@@ -207,11 +230,12 @@ const App = {
     try {
       const { web3 } = this;
       const { transfer } = this.resale.methods;
-      var amount = parseInt($("#amount").val()) * 11 / 10;
+      var amount = parseInt($("#amount").text()) * 11 / 10;
       amount = amount.toString();
-      await transfer().send({ from: this.account, value: web3.utils.toWei(amount, 'ether') })
+      await transfer().send({ from: this.account, value: web3.utils.toWei(amount, 'ether') });
+      checkStatus = false;
     } catch(error) {
-      $("#status").html('error');
+      console.log(error);
     }
   },
   

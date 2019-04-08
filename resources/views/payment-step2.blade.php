@@ -55,6 +55,7 @@
 </div>
 <div id="menu1" class="container tab-pane active">
     <p id="amount">{{$area->tick_price}}</p>
+    <p id="wallet">{{$wallet}}</p>
     @if(count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
@@ -64,15 +65,18 @@
         </ul>
     </div>
     @endif
-    <form method="post" action="{{action('HomeController@updateOwner')}}">
+    <!-- <form onsubmit="return App.buy();return App.jumpToStep3()" method="post" action="{{action('HomeController@updateOwner')}}" id="form">
         {{csrf_field()}}
         <div class="form-group">
-            <input type="text" id="wallet" name="wallet" class="form-control" />
+            <input type="text" id="wallet" name="wallet" class="form-control" required/>
+            <input onclick="App.checkStatus()" class="btn btn-outline-primary" value="檢查錢包"/>
         </div>
-    </form>
-    <button onclick="App.checkStatus()" class="btn btn-outline-primary">檢查錢包</button>
-    <button type="submit" class="btn btn-outline-danger" onclick="App.buy();App.jumpToStep3()">確認付款</button>
+    </form> -->
+
     
+    <button onclick="App.checkStatus()" class="btn btn-outline-primary">檢查錢包</button>
+    <button onclick="App.buy();App.jumpToStep3()" class="btn btn-outline-danger">確認付款</button>
+    <!-- <button type="submit" class="btn btn-outline-danger" onclick="App.buy();App.jumpToStep3()">確認付款</button> -->
     <!-- <p id="wallet">0x71b50f3c3fe9B5701CAB53487330b91c1a9C816a</p> -->
     <!-- <div align="center"><button type="submit" value="Edit" onclick="App.buy()" class="btn btn-outline-danger">確認付款</button></div> -->
 </div>

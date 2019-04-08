@@ -55,7 +55,7 @@ Route::get('/aboutus',function(){
   return view('aboutus');
 });
 
-Route::get('/payment-step1', 'HomeController@pay');
+// Route::get('/payment-step1', 'HomeController@pay');
 
 Route::get('/payment-step2', 'HomeController@pay2');
 
@@ -67,6 +67,20 @@ Route::get('/resale-step1', 'HomeController@resale');
 
 Route::get('/resale-step2', 'HomeController@resale2');
 
+Route::get('/resale-step3', 'HomeController@resale3');
+
 Route::get('/orders', 'HomeController@orders');
 
 Route::get('/programs', 'HomeController@programs');
+
+Route::get('/resale', 'HomeController@resaleList');
+
+Route::get('buyTicket', 'HomeController@buyTicket');
+
+//test
+
+Route::get('/test', function(){
+  return view('test');
+});
+
+Route::get('test2', 'HomeController@test');
