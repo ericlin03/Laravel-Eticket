@@ -54,9 +54,8 @@
 </table>
 </div>
 <div id="menu1" class="container tab-pane active">
-<p id="amount">{{$area->tick_price}}</p>
-    <p id="wallet">{{$wallet}}</p>
-    <div style="display:none"><p id="seller">{{$area->owner_id}}<p></div>
+    <p>總金額：</p><p id="amount">{{$area->tick_price}}</p>
+    <p>付款地址：</p><p id="wallet">{{$wallet}}</p>
     @if(count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
@@ -66,8 +65,15 @@
         </ul>
     </div>
     @endif
-    <button onclick="App.checkResaleStatus()" class="btn btn-outline-primary">檢查錢包</button>
-    <button class="btn btn-outline-danger" onclick="App.transfer();App.jumpToResaleStep3()">確認付款</button>
+    <button id="checkButton" onclick="App.checkResaleStatus()" class="btn btn-outline-primary">檢查錢包</button>
+    <!-- <button class="btn btn-outline-danger" onclick="App.transfer();App.jumpToResaleStep3()">確認付款</button> -->
+
+    <form method="post" action="updateOwner">
+    {{csrf_field()}}
+      <button id="submitButton" type="submit" onclick="App.transfer()" class="btn btn-outline-danger">確認付款</button>
+      <input type="text" name="ticket_id" value="{{ $ticket_id }}" style="display:none" />
+      <input type="text" name="prog_id" value="{{ $prog_id }}" style="display:none" />
+    </form>
     
     <!-- <p id="wallet">0x71b50f3c3fe9B5701CAB53487330b91c1a9C816a</p> -->
     <!-- <div align="center"><button type="submit" value="Edit" onclick="App.buy()" class="btn btn-outline-danger">確認付款</button></div> -->
@@ -124,4 +130,15 @@
       </div>
     </footer>  
     </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#submitButton").hide();
+
+    $("#checkButton").click(function(){
+      $("#submitButton").show();
+      $("#checkButton").hide();
+    });
+  });
+</script>
 @endsection

@@ -54,8 +54,8 @@
 </table>
 </div>
 <div id="menu1" class="tab-pane fade">
-    <p id="amount">1</p>
-    <p id="userAddress">0x71b50f3c3fe9B5701CAB53487330b91c1a9C816a</p>
+<p>總金額：</p><p id="amount">{{$area->tick_price}}</p>
+    <p>付款地址：</p><p id="wallet">{{$wallet}}</p>
 </div>
 <div id="menu2" class="container tab-pane active" align="center">
     <br><br>

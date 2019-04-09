@@ -34,7 +34,15 @@
               <td><font color="black">{{$resale->tick_area}}</td>
               <td><font color="black">{{$resale->tick_seat}}</td>
             <tr>
-            <tr align="center"><td colspan="3"><button style="float:center" onclick="" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button></td></tr>
+            <tr align="center">
+              <td colspan="3">
+                <form method="get" action="resaleTicket">
+                <input type="text" name="prog_id" value="{{$resale->prog_id}}" style="display:none" />
+                <input type="text" name="ticket_id" value="{{$resale->ticket_id}}" style="display:none" />
+                <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
+              </form>
+              </td>
+            </tr>
           </table>
         </div>
       </div>

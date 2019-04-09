@@ -97,7 +97,7 @@ class HomeController extends Controller
         $this->middleware('auth');
         $user = Auth::user();
         $wallet = $user->wallet;
-        $area = DB::select('select tick_area, type, tick_seat, prog_name from program_seat where status=\'resale\'');
+        $area = DB::select('select tick_area, type, tick_seat, prog_name, prog_id, ticket_id from program_seat where status=\'resale\'');
         return view('resale',compact('area'));
     }
 
@@ -151,14 +151,76 @@ class HomeController extends Controller
         $user = Auth::user();
         $wallet = $user->wallet;
         $progName = $request->input('prog_name');
-        $seat = DB::select('select * from program_seat');
+        $seat = DB::select('SELECT * FROM program_seat');
         foreach($seat as $p) {
-            if ($p->status != 'sold' || $p->status != 'resale') {
+            if ($p->status != "sold" && $p->status != "resale") {
+                $ticket_id = $p->ticket_id;
+                $prog_id = $p->prog_id;
                 $act = DB::select('select * from program where prog_id=?',[$p->prog_id]);
                 $area = DB::select('select tick_price, type from program_seat where ticket_id=?',[$p->ticket_id]);
+                break;
+            } else {
+                echo "<p>票已售罄</p>";
             }
         }
-        return view('payment-step1', compact('act', 'area'));
+        return view('payment-step1', compact('act', 'area', 'ticket_id', 'prog_id'));
+    }
+
+    public function payment(Request $request) {
+        $this->middleware('auth');
+        $user = Auth::user();
+        $wallet = $user->wallet;
+        $ticket_id = $request->input('ticket_id');
+        $prog_id = $request->input('prog_id');
+        $act = DB::select('select * from program where prog_id=?',[$prog_id]);
+        $area = DB::select('select tick_price, type, owner_id from program_seat where ticket_id=?',[$ticket_id]);
+        return view('payment-step2',compact('act','area', 'wallet', 'ticket_id', 'prog_id'));
+    }
+
+    public function updateOwner(Request $request) {
+        $this->middleware('auth');
+        $user = Auth::user();
+        $wallet = $user->wallet;
+        $ticket_id = $_POST['ticket_id'];
+        $prog_id = $_POST['prog_id'];
+        $act = DB::select('select * from program where prog_id=?',[$prog_id]);
+        $area = DB::select('select tick_price, type from program_seat where ticket_id=?',[$ticket_id]);
+        DB::table('program_seat')->where('ticket_id', $ticket_id)->update(['owner_id' => $wallet, 'status' => 'sold']);
+        return view('payment-step3', compact('act', 'area', 'wallet'));
+    }
+
+    public function resaleTicket(Request $request) {
+        $this->middleware('auth');
+        $user = Auth::user();
+        $wallet = $user->wallet;
+        $ticket_id = $request->input('ticket_id');
+        $prog_id = $request->input('prog_id');
+        $act = DB::select('select * from program where prog_id=?',[$prog_id]);
+        $area = DB::select('select tick_price, type from program_seat where ticket_id=?',[$ticket_id]);
+        return view('resale-step1', compact('act', 'area', 'ticket_id', 'prog_id'));
+    }
+
+    public function resalePayment(Request $request) {
+        $this->middleware('auth');
+        $user = Auth::user();
+        $wallet = $user->wallet;
+        $ticket_id = $request->input('ticket_id');
+        $prog_id = $request->input('prog_id');
+        $act = DB::select('select * from program where prog_id=?',[$prog_id]);
+        $area = DB::select('select tick_price, type, owner_id from program_seat where ticket_id=?',[$ticket_id]);
+        return view('resale-step2',compact('act','area', 'wallet', 'ticket_id', 'prog_id'));
+    }
+
+    public function changeOwner(Request $request) {
+        $this->middleware('auth');
+        $user = Auth::user();
+        $wallet = $user->wallet;
+        $ticket_id = $_POST['ticket_id'];
+        $prog_id = $_POST['prog_id'];
+        $act = DB::select('select * from program where prog_id=?',[$prog_id]);
+        $area = DB::select('select tick_price, type from program_seat where ticket_id=?',[$ticket_id]);
+        DB::table('program_seat')->where('ticket_id', $ticket_id)->update(['owner_id' => $wallet, 'status' => 'sold']);
+        return view('resale-step3', compact('act', 'area', 'wallet'));
     }
 
     //test

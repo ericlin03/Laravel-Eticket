@@ -57,13 +57,13 @@ Route::get('/aboutus',function(){
 
 // Route::get('/payment-step1', 'HomeController@pay');
 
-Route::get('/payment-step2', 'HomeController@pay2');
+// Route::get('/payment-step2', 'HomeController@pay2');
 
-Route::post('/payment-step2', 'HomeController@updateOwner');
+// Route::post('/payment-step2', 'HomeController@updateOwner');
 
-Route::get('/payment-step3', 'HomeController@pay3');
+// Route::get('/payment-step3', 'HomeController@pay3');
 
-Route::get('/resale-step1', 'HomeController@resale');
+// Route::get('/resale-step1', 'HomeController@resale');
 
 Route::get('/resale-step2', 'HomeController@resale2');
 
@@ -76,6 +76,14 @@ Route::get('/programs', 'HomeController@programs');
 Route::get('/resale', 'HomeController@resaleList');
 
 Route::get('buyTicket', 'HomeController@buyTicket');
+
+Route::get('payment', 'HomeController@payment');
+
+Route::post('updateOwner', 'HomeController@updateOwner');
+
+Route::get('resaleTicket', 'HomeController@resaleTicket');
+
+Route::get('resalePayment', 'HomeController@resalePayment');
 
 //test
 

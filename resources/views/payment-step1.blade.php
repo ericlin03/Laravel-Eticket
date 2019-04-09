@@ -52,13 +52,19 @@
   @endforeach
 </tr>
 </table>
-<div align="center"><button type="button" class="btn btn-outline-danger" onclick="javascript:location.href='./payment-step2'">下一步</button></div>
+<div align="center">
+  <form method="get" action="payment">
+    <button type="submit" class="btn btn-outline-danger">下一步</button>
+    <input type="text" name="ticket_id" style="display:none" value="{{ $ticket_id }}" />
+    <input type="text" name="prog_id" style="display:none" value="{{ $prog_id }}" />
+  </form>
+</div>
 </div>
 <div id="menu1" class="tab-pane fade"><h3><strong>請完成先前步驟</strong></h3></div>
 <div id="menu2" class="tab-pane fade"><h3><strong>請完成先前步驟</strong></h3></div>
 </div>
 </div>
-
+<!-- <form method="post" action="payment" style="display:none"><input type="text" name="ticket_id"></form> -->
 <!-- footer -->
 <hr>
 <div class=" text-white bg-dark p-4">

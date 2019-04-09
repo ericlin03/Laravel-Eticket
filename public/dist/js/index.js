@@ -68407,21 +68407,20 @@ var App = {
               });
 
             case 5:
-              $('#viewSeller').html(seller);
-              _context12.next = 11;
+              _context12.next = 10;
               break;
 
-            case 8:
-              _context12.prev = 8;
+            case 7:
+              _context12.prev = 7;
               _context12.t0 = _context12["catch"](0);
               console.log(_context12.t0);
 
-            case 11:
+            case 10:
             case "end":
               return _context12.stop();
           }
         }
-      }, _callee12, this, [[0, 8]]);
+      }, _callee12, this, [[0, 7]]);
     }));
 
     function setSeller() {
@@ -68458,21 +68457,20 @@ var App = {
               });
 
             case 5:
-              $("#viewAmount").html(amount);
-              _context13.next = 11;
+              _context13.next = 10;
               break;
 
-            case 8:
-              _context13.prev = 8;
+            case 7:
+              _context13.prev = 7;
               _context13.t0 = _context13["catch"](0);
               console.log(_context13.t0);
 
-            case 11:
+            case 10:
             case "end":
               return _context13.stop();
           }
         }
-      }, _callee13, this, [[0, 8]]);
+      }, _callee13, this, [[0, 7]]);
     }));
 
     function setAmount() {

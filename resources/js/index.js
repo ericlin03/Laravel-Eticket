@@ -199,7 +199,6 @@ const App = {
       const { setSeller } = this.resale.methods;
       var seller = $('#seller').text();
       await setSeller(seller).send({ from: this.account });
-      $('#viewSeller').html(seller);
     } catch (error) {
       console.log(error);
     }
@@ -220,7 +219,6 @@ const App = {
       const { setAmount } = this.resale.methods;
       var amount = parseInt($("#amount").text());
       await setAmount(amount).send({ from: this.account });
-      $("#viewAmount").html(amount);
     } catch (error) {
       console.log(error);
     }
