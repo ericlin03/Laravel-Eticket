@@ -65,9 +65,9 @@ Route::get('/aboutus',function(){
 
 // Route::get('/resale-step1', 'HomeController@resale');
 
-Route::get('/resale-step2', 'HomeController@resale2');
+// Route::get('/resale-step2', 'HomeController@resale2');
 
-Route::get('/resale-step3', 'HomeController@resale3');
+// Route::get('/resale-step3', 'HomeController@resale3');
 
 Route::get('/orders', 'HomeController@orders');
 

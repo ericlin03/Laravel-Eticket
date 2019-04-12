@@ -55,14 +55,14 @@ class HomeController extends Controller
 
     }
 
-    public function pay2(){
-        $this->middleware('auth');
-        $user = Auth::user();
-        $wallet = $user->wallet;
-        $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
-        $area = DB::select('select tick_price, type, owner_id from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
-        return view('payment-step2',compact('act','area', 'wallet'));
-    }
+    // public function pay2(){
+    //     $this->middleware('auth');
+    //     $user = Auth::user();
+    //     $wallet = $user->wallet;
+    //     $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
+    //     $area = DB::select('select tick_price, type, owner_id from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
+    //     return view('payment-step2',compact('act','area', 'wallet'));
+    // }
 
     // public function updateOwner(){
     //     $this->middleware('auth');
@@ -75,15 +75,15 @@ class HomeController extends Controller
     //     // $area.save();
     // }
 
-    public function pay3(){
-        $this->middleware('auth');
-        $user = Auth::user();
-        $wallet = $user->wallet;
-        $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
-        $area = DB::select('select tick_price, type from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
-        DB::table('program_seat')->where('ticket_id', 1)->update(['owner_id' => $wallet, 'status' => 'sold']);
-        return view('payment-step3',compact('act','area'));
-    }
+    // public function pay3(){
+    //     $this->middleware('auth');
+    //     $user = Auth::user();
+    //     $wallet = $user->wallet;
+    //     $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
+    //     $area = DB::select('select tick_price, type from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
+    //     DB::table('program_seat')->where('ticket_id', 1)->update(['owner_id' => $wallet, 'status' => 'sold']);
+    //     return view('payment-step3',compact('act','area'));
+    // }
 
     public function personalorder(){
         $this->middleware('auth');
@@ -101,33 +101,33 @@ class HomeController extends Controller
         return view('resale',compact('area'));
     }
 
-    public function resale(){
-        $this->middleware('auth');
-        $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
-        $area = DB::select('select tick_price, type from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
-        $user = Auth::user();
-        $wallet = $user->wallet;
-        return view('resale-step1',compact('act','area'));
-    }
+    // public function resale(){
+    //     $this->middleware('auth');
+    //     $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
+    //     $area = DB::select('select tick_price, type from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
+    //     $user = Auth::user();
+    //     $wallet = $user->wallet;
+    //     return view('resale-step1',compact('act','area'));
+    // }
 
-    public function resale2(Request $request){
-        $this->middleware('auth');
-        $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
-        $area = DB::select('select tick_price, type, owner_id from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
-        $user = Auth::user();
-        $wallet = $user->wallet;
-        return view('resale-step2',compact('act','area', 'wallet'));
-    }
+    // public function resale2(Request $request){
+    //     $this->middleware('auth');
+    //     $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
+    //     $area = DB::select('select tick_price, type, owner_id from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
+    //     $user = Auth::user();
+    //     $wallet = $user->wallet;
+    //     return view('resale-step2',compact('act','area', 'wallet'));
+    // }
 
-    public function resale3(){
-        $this->middleware('auth');
-        $user = Auth::user();
-        $wallet = $user->wallet;
-        $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
-        $area = DB::select('select tick_price, type from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
-        DB::table('program_seat')->where('ticket_id', 1)->update(['owner_id' => $wallet, 'status' => 'sold']);
-        return view('resale-step3',compact('act','area'));
-    }
+    // public function resale3(){
+    //     $this->middleware('auth');
+    //     $user = Auth::user();
+    //     $wallet = $user->wallet;
+    //     $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
+    //     $area = DB::select('select tick_price, type from program_seat where ticket_id=:ticket_id',['ticket_id'=>1]);
+    //     DB::table('program_seat')->where('ticket_id', 1)->update(['owner_id' => $wallet, 'status' => 'sold']);
+    //     return view('resale-step3',compact('act','area'));
+    // }
 
     public function orders() {
         $this->middleware('auth');
@@ -151,7 +151,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $wallet = $user->wallet;
         $progName = $request->input('prog_name');
-        $seat = DB::select('SELECT * FROM program_seat');
+        $seat = DB::select('SELECT * FROM program_seat WHERE prog_name=?',[$progName]);
         foreach($seat as $p) {
             if ($p->status != "sold" && $p->status != "resale") {
                 $ticket_id = $p->ticket_id;
