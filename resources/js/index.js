@@ -42,7 +42,7 @@ const App = {
         deployBuyTicket.address,
       );
 
-      const deployBuyTickets = buyTicketArtifact.networks[networkId];
+      const deployBuyTickets = buyTicketsArtifact.networks[networkId];
       this.buyTickets = new web3.eth.Contract(
         buyTicketsArtifact.abi,
         deployBuyTickets.address,

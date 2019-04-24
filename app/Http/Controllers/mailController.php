@@ -22,7 +22,12 @@ class mailController extends Controller
             $this->walletFromDB = $walletQuery[0] -> wallet;
             $this->email = $emailQuery[0] -> email;
             // $check = true;
+            if($this->walletFromDB == $walletFromBlade){
             return $this->mailer();
+            }
+            else{
+                echo "<a href=\"http://localhost:8000/buyTicket\">身分證字號與錢包不符返回購買頁面</a>";
+            }
         } else {
             echo "<a href=\"http://localhost:8000/buyTicket\">無此身分證字號用戶!返回購買頁面</a>";
         }
