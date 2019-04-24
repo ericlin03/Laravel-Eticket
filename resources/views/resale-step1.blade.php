@@ -46,9 +46,9 @@
 　</tr>
 <tr>
   @foreach($area as $area)
-　<td>{{$area->type}}</td>
+　<td>{{ $area->type }}</td>
 　<td>不分區隨機挑選</td>
-　<td>{{$area->tick_price}}</td>  
+　<td>{{ $price }}</td>  
   @endforeach
 </tr>
 </table>

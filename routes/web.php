@@ -55,19 +55,9 @@ Route::get('/aboutus',function(){
   return view('aboutus');
 });
 
-// Route::get('/payment-step1', 'HomeController@pay');
-
-// Route::get('/payment-step2', 'HomeController@pay2');
-
-// Route::post('/payment-step2', 'HomeController@updateOwner');
-
-// Route::get('/payment-step3', 'HomeController@pay3');
-
-// Route::get('/resale-step1', 'HomeController@resale');
-
-// Route::get('/resale-step2', 'HomeController@resale2');
-
-// Route::get('/resale-step3', 'HomeController@resale3');
+Route::get('/resale-example', function(){
+return view('resale-example');
+});
 
 Route::get('/orders', 'HomeController@orders');
 
@@ -75,7 +65,7 @@ Route::get('/programs', 'HomeController@programs');
 
 Route::get('/resale', 'HomeController@resaleList');
 
-Route::get('buyTicket', 'HomeController@buyTicket');
+Route::get('buyOneTicket', 'HomeController@buyOneTicket');
 
 Route::get('payment', 'HomeController@payment');
 
@@ -85,6 +75,30 @@ Route::get('resaleTicket', 'HomeController@resaleTicket');
 
 Route::get('resalePayment', 'HomeController@resalePayment');
 
+Route::get('resaleProcess', 'HomeController@resaleProcess');
+
+Route::post('resaleUpdate', 'HomeController@resaleUpdate');
+
+Route::get('/buyTicket', 'HomeController@buyTicket');
+Route::get('/buyTicket', function () {
+    return view('buyTicket');
+});
+// confirm ticket
+Route::get('/confirmTicket', 'HomeController@confirmTicket');
+// Route::get('/confirmTicket', function () {
+//     return view('confirmTicket');
+// });
+//buying ticket
+Route::get('/buyingTicket', 'mailController@send');
+Route::get('/buyingTicket', 'HomeController@buyingTicket');
+//mail
+Route::post('send', 'mailController@send');
+Route::get('send', 'mailController@send');
+// Route::get('buffer', function () {
+//     return view('buffer');
+// });
+Route::get('buffer', 'mailController@passer');
+Route::redirect('buffer', 'home');
 //test
 
 Route::get('/test', function(){

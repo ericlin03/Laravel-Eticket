@@ -97,8 +97,11 @@ class HomeController extends Controller
         $this->middleware('auth');
         $user = Auth::user();
         $wallet = $user->wallet;
-        $area = DB::select('select tick_area, type, tick_seat, prog_name, prog_id, ticket_id from program_seat where status=\'resale\'');
-        return view('resale',compact('area'));
+        $area = DB::select('select tick_area, type, tick_seat, prog_name, prog_id, ticket_id, tick_price from program_seat where status=\'resale\'');
+        foreach($area as $p) {
+            $price = $p->tick_price * 1.05;
+        }
+        return view('resale',compact('area', 'price'));
     }
 
     // public function resale(){
@@ -134,7 +137,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $wallet = $user->wallet;
         $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
-        $area = DB::select('select tick_area, type, tick_seat, prog_name from program_seat where owner_id=?', [$wallet]);
+        $area = DB::select('select tick_area, type, tick_seat, prog_name, status, ticket_id, prog_id from program_seat where owner_id=?', [$wallet]);
         return view('orders',compact('act','area'));
     }
 
@@ -146,7 +149,7 @@ class HomeController extends Controller
         return view('programs', compact('act'));
     }
 
-    public function buyTicket(Request $request) {
+    public function buyOneTicket(Request $request) {
         $this->middleware('auth');
         $user = Auth::user();
         $wallet = $user->wallet;
@@ -197,7 +200,10 @@ class HomeController extends Controller
         $prog_id = $request->input('prog_id');
         $act = DB::select('select * from program where prog_id=?',[$prog_id]);
         $area = DB::select('select tick_price, type from program_seat where ticket_id=?',[$ticket_id]);
-        return view('resale-step1', compact('act', 'area', 'ticket_id', 'prog_id'));
+        foreach($area as $p) {
+            $price = $p->tick_price * 1.05;
+        }
+        return view('resale-step1', compact('act', 'area', 'ticket_id', 'prog_id', 'price'));
     }
 
     public function resalePayment(Request $request) {
@@ -208,7 +214,10 @@ class HomeController extends Controller
         $prog_id = $request->input('prog_id');
         $act = DB::select('select * from program where prog_id=?',[$prog_id]);
         $area = DB::select('select tick_price, type, owner_id from program_seat where ticket_id=?',[$ticket_id]);
-        return view('resale-step2',compact('act','area', 'wallet', 'ticket_id', 'prog_id'));
+        foreach($area as $p) {
+            $price = $p->tick_price * 1.05;
+        }
+        return view('resale-step2',compact('act','area', 'wallet', 'ticket_id', 'prog_id', 'price'));
     }
 
     public function changeOwner(Request $request) {
@@ -221,6 +230,62 @@ class HomeController extends Controller
         $area = DB::select('select tick_price, type from program_seat where ticket_id=?',[$ticket_id]);
         DB::table('program_seat')->where('ticket_id', $ticket_id)->update(['owner_id' => $wallet, 'status' => 'sold']);
         return view('resale-step3', compact('act', 'area', 'wallet'));
+    }
+
+    public function resaleProcess(Request $request) {
+        $this->middleware('auth');
+        $user = Auth::user();
+        $wallet = $user->wallet;
+        $ticket_id = $_GET['ticket_id'];
+        $prog_id = $_GET['prog_id'];
+        $act = DB::select('select * from program where prog_id=?',[$prog_id]);
+        $area = DB::select('select tick_price, type, tick_area, tick_seat from program_seat where ticket_id=?',[$ticket_id]);
+        foreach($area as $p){
+            $price = $p->tick_price * 0.95;
+        }
+        return view('resaleProcess', compact('act', 'area', 'wallet', 'price', 'ticket_id', 'prog_id'));
+    }
+
+    public function resaleUpdate(Request $request) {
+        $this->middleware('auth');
+        $user = Auth::user();
+        $wallet = $user->wallet;
+        $ticket_id = $_POST['ticket_id'];
+        $area = DB::select('select * from program_seat where ticket_id=?',[$ticket_id]);
+        foreach($area as $p){
+            DB::tabel('ledger')->insert(
+                ['eventType' => '轉售',
+                'buyer' => $wallet,
+                'seller' => $p->owner,
+                'amount' => $p->amount,
+                'prog_id' => $p->prog_id,
+                'date' => date("Y/m/d")
+                ]
+            );
+        }
+        DB::table('program_seat')->where('ticket_id', $ticket_id)->update(['status' => 'resale']);
+        echo ("<script LANGUAGE='JavaScript'>
+          window.location.replace('./orders');
+          window.alert('此票卷已發佈到二手票卷中！');
+        </script>");
+    }
+
+    public function buyingTicket()
+    {
+        $this->middleware('auth');
+        // $user = Auth::user();
+        // $email = $user->email;
+        $emailQuery = DB::table('users') -> select('email') -> where('identity', '=', 'A789456123') -> get();
+        $email = $emailQuery[0]->email;
+        return view('buyingTicket')->with('email', $email);
+    }
+    //confirm Ticket
+    public function confirmTicket()
+    {
+        $this->middleware('auth');
+        $user = Auth::user();
+        $wallet = $user->wallet;
+        return view('confirmTicket')->with('wallet', $wallet);
     }
 
     //test

@@ -28,14 +28,16 @@ contract Resale {
 
     // 確定買票方多付10%的手續費
     modifier comfirm() {
-        require(msg.sender == buyer && msg.value == originalPrice * 11 / 10, "金額出問題...");
+        require(msg.sender == buyer && msg.value == originalPrice * 105 / 100, "金額出問題...");
         _;
     }
 
     // 轉帳；買家得到原票價的90％，平台得到中間的手續費
-    function transfer() public payable comfirm() {
-        seller.transfer(originalPrice * 9 / 10);
-        platform.transfer(originalPrice * 2 / 10);
+    function transfer() public payable {
+        // require(msg.sender == buyer);
+        // require(msg.value == originalPrice * 105 / 100);
+        seller.transfer(originalPrice);
+        // platform.transfer(originalPrice);
     }
 }
 

@@ -54,8 +54,9 @@
 </table>
 </div>
 <div id="menu1" class="container tab-pane active">
-    <p>總金額：</p><p id="amount">{{$area->tick_price}}</p>
-    <p>付款地址：</p><p id="wallet">{{$wallet}}</p>
+    <p>總金額：</p><p id="amount">{{ $area->tick_price }}</p>
+    <p>付款地址：</p><p id="wallet">{{ $wallet }}</p>
+    <p id="seller" style="display:none">{{ $area->owner_id }}</p>
     @if(count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
@@ -66,14 +67,17 @@
     </div>
     @endif
     <button id="checkButton" onclick="App.checkResaleStatus()" class="btn btn-outline-primary">檢查錢包</button>
+    <button id="setAmount" onclick="App.setAmount()" class="btn btn-outline-primary">確認金額</button>
+    <button id="setSeller" onclick="App.setSeller()" class="btn btn-outline-primary">確認賣家</button>
+    <button id="submitButton" type="submit" onclick="App.transfer()" class="btn btn-outline-danger">確認付款</button>
     <!-- <button class="btn btn-outline-danger" onclick="App.transfer();App.jumpToResaleStep3()">確認付款</button> -->
 
-    <form method="post" action="updateOwner">
+    <!-- <form method="post" action="updateOwner">
     {{csrf_field()}}
       <button id="submitButton" type="submit" onclick="App.transfer()" class="btn btn-outline-danger">確認付款</button>
       <input type="text" name="ticket_id" value="{{ $ticket_id }}" style="display:none" />
       <input type="text" name="prog_id" value="{{ $prog_id }}" style="display:none" />
-    </form>
+    </form> -->
     
     <!-- <p id="wallet">0x71b50f3c3fe9B5701CAB53487330b91c1a9C816a</p> -->
     <!-- <div align="center"><button type="submit" value="Edit" onclick="App.buy()" class="btn btn-outline-danger">確認付款</button></div> -->
@@ -131,14 +135,26 @@
     </footer>  
     </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $(document).ready(function(){
     $("#submitButton").hide();
+    $("#setAmount").hide();
+    $("#setSeller").hide();
 
     $("#checkButton").click(function(){
-      $("#submitButton").show();
       $("#checkButton").hide();
+      $("#setAmount").show();
+    });
+
+    $("#setAmount").click(function(){
+      $("#setAmount").hide();
+      $("#setSeller").show();
+    });
+
+    $("#setSeller").click(function(){
+      $("#setSeller").hide();
+      $("#submitButton").show();
     });
   });
-</script>
+</script> -->
 @endsection

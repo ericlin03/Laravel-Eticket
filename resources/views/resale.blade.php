@@ -28,14 +28,16 @@
               <th><font color="black">票種</th>
               <th><font color="black">區域</th>
               <th><font color="black">座位</th>
+              <th><font color="black">票價</th>
             <tr>
             <tr class="table-info">
-              <td><font color="black">{{$resale->type}}</td>
-              <td><font color="black">{{$resale->tick_area}}</td>
-              <td><font color="black">{{$resale->tick_seat}}</td>
+              <td><font color="black">{{ $resale->type }}</td>
+              <td><font color="black">{{ $resale->tick_area }}</td>
+              <td><font color="black">{{ $resale->tick_seat }}</td>
+              <td><font color="black">{{ $price }}</td>
             <tr>
             <tr align="center">
-              <td colspan="3">
+              <td colspan="4">
                 <form method="get" action="resaleTicket">
                 <input type="text" name="prog_id" value="{{$resale->prog_id}}" style="display:none" />
                 <input type="text" name="ticket_id" value="{{$resale->ticket_id}}" style="display:none" />

@@ -1,0 +1,1 @@
+電此連結按確認後付款: http://localhost:8000/confirmTicket

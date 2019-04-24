@@ -2,6 +2,7 @@ import Web3 from "../../node_modules/web3";
 import eticketArtifact from "../../build/contracts/Eticket.json";
 import resaleArtifact from "../../build/contracts/Resale.json";
 import buyTicketArtifact from "../../build/contracts/BuyTicket.json";
+import buyTicketsArtifact from "../../build/contracts/BuyTickets.json";
 // import {Personal} from 'web3-eth-personal';
 // import { once } from "cluster";
 
@@ -11,9 +12,10 @@ var checkStatus = false;
 const App = {
   web3: null,
   account: null,
-  meta: null,
+  eticket: null,
   resale: null,
   buyTicket: null,
+  buyTickets: null,
 
   start: async function() {
     const { web3 } = this;
@@ -22,10 +24,10 @@ const App = {
       // get contract instance
       const networkId = await web3.eth.net.getId();
 
-      const deployedNetwork = eticketArtifact.networks[networkId];
-      this.meta = new web3.eth.Contract(
+      const deployedEticket = eticketArtifact.networks[networkId];
+      this.eticket = new web3.eth.Contract(
         eticketArtifact.abi,
-        deployedNetwork.address,
+        deployedEticket.address,
       );
 
       const deployResale = resaleArtifact.networks[networkId];
@@ -38,6 +40,12 @@ const App = {
       this.buyTicket = new web3.eth.Contract(
         buyTicketArtifact.abi,
         deployBuyTicket.address,
+      );
+
+      const deployBuyTickets = buyTicketArtifact.networks[networkId];
+      this.buyTickets = new web3.eth.Contract(
+        buyTicketsArtifact.abi,
+        deployBuyTickets.address,
       );
 
 
@@ -69,6 +77,50 @@ const App = {
     } catch (error) {
       // console.error("Could not connect to contract or chain.");
       console.log(error);
+    }
+  },
+
+  // Contract BuyTickets
+  setBuyer: async function() {
+    try {
+      const { setBuyer } = this.buyTickets.methods;
+      let receiver = $("#rec").val();
+      await console.log(receiver);
+      await setBuyer(receiver, "email", false).send({
+        from: this.account
+      });
+      // $("#status").html(await getBuyers().call());
+    } catch (error) {
+      // $("#viewReceiver").html("error");
+      console.log(error);
+    }
+  },
+
+  confirm: async function() {
+    try {
+      const { web3 } = this;
+      const { confirm } = this.buyTickets.methods;
+      let wallet = $("#wallet").text();
+      wallet = wallet.toString();
+      let amount = $("#amount").text();
+      // amount = amount.toString();
+      if (checkStatus) {
+        setTimeout(function() {
+          window.location.href = "http://localhost:8000/home";
+        }, 200);
+        await confirm().send({
+          from: wallet,
+          value: web3.utils.toWei(amount, "ether")
+        });
+      } else {
+        alert("請先確認錢包");
+        setTimeout(function() {
+          window.location.href = "http://localhost:8000/confirmTicket";
+        }, 200);
+      }
+    } catch (error) {
+      console.log(error);
+      $("#status").html("error");
     }
   },
 
@@ -110,7 +162,7 @@ const App = {
   viewBalance: async function() {
     try {
       const { web3 } = this;
-      const { getContractBalance } = this.meta.methods;
+      const { getContractBalance } = this.eticket.methods;
       var balance = await getContractBalance().call();
       balance = balance.toString();
       $("#balance").html(web3.utils.fromWei(balance, 'ether'));
@@ -121,8 +173,8 @@ const App = {
 
   setReceiver: async function() {
     try {
-      const { setReceiver } = this.meta.methods;
-      const { getReceiver } = this.meta.methods;
+      const { setReceiver } = this.eticket.methods;
+      const { getReceiver } = this.eticket.methods;
       var receiver = $("#receiver").val();
       await setReceiver(receiver).send({ from: this.account });
       var viewReceiver = await getReceiver().call();
@@ -135,8 +187,8 @@ const App = {
 
   setDays: async function() {
     try {
-      const { setDays } = this.meta.methods;
-      const { getDays } = this.meta.methods;
+      const { setDays } = this.eticket.methods;
+      const { getDays } = this.eticket.methods;
       var days = parseInt($("#days").val());
       // web3.eth.personal.unlockAccount(this.account, '123456', 100, function(err, object){if (!err){$('#status').html('unlocked!')}});
       await setDays(days).send({ from: this.account });
@@ -150,7 +202,7 @@ const App = {
   sendToContract: async function() {
     try {
       const { web3 } = this;
-      const { sendToContract } = this.meta.methods;
+      const { sendToContract } = this.eticket.methods;
       await sendToContract().send({from: this.account, value: web3.utils.toWei('1', 'ether')});
       this.viewBalance();
       $("#contractStatus").html('success');
@@ -161,7 +213,7 @@ const App = {
 
   transferToOrganizer: async function() {
     try {
-      const { transferToOrganizer } = this.meta.methods;
+      const { transferToOrganizer } = this.eticket.methods;
       await transferToOrganizer().send({ from: this.account });
       this.viewBalance();
       $("#status").html('success');
@@ -172,33 +224,51 @@ const App = {
 
   // Contract Resale
   checkResaleStatus: async function() {
+    console.log("hello");
     if (this.account == $('#wallet').text()){
       checkStatus = true;
-      var status = confirm('確定要購買此二手票卷嗎？');
-      if (status == true) {
-        this.setAmount();
-        this.setSeller();
-        alert('請先在MetaMask中確認兩次交易後再按下確認付款！');
-      } else {
-        alert('您已取消購買！');
-        window.location.replace('./resale');
-      }
+      alert('錢包位址正確');
+      // var status = confirm('確定要購買此二手票卷嗎？');
+      // if (status == true) {
+      //   this.setAmount();
+      //   this.setSeller();
+      //   alert('請先在MetaMask中確認兩次交易後再按下確認付款！');
+      // } else {
+      //   alert('您已取消購買！');
+      //   window.location.replace('./resale');
+      // }
     } else {
+      console.log($('#wallet').text());
+      console.log(this.account);
       alert('錢包地址與個人資料不相符');
     }
-  },
 
-  jumpToResaleStep3: async function(){
-    if (checkStatus == true){
-      window.location.replace('./resale-step3');
-    }
+    // if (checkStatus == true) {
+    //   var status = confirm('錢包位址正確，確定要購買此二手票卷嗎？');
+    //   if (status == true) {
+    //     this.setAmount();
+    //     var statusSeller = confirm('請先在MetaMask中按下CONFIRM，此步驟是設定金額');
+    //   } else {
+    //     alert('您已取消購買！');
+    //     window.location.replace('./resale');
+    //   }
+    // }
+
+    // if (statusSeller == true) {
+    //   this.setSeller();
+    //   alert('請先在MetaMask中按下CONFIRM，此步驟是設定賣家');
+    // }
   },
 
   setSeller: async function() {
+    console.log(this.account);
     try {
-      const { setSeller } = this.resale.methods;
-      var seller = $('#seller').text();
-      await setSeller(seller).send({ from: this.account });
+      if (checkStatus == true) {
+        const { setSeller } = this.resale.methods;
+        // var seller = $('#seller').val();
+        var seller = $('#seller').text();
+        await setSeller(seller).send({ from: this.account });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -216,9 +286,12 @@ const App = {
 
   setAmount: async function() {
     try {
-      const { setAmount } = this.resale.methods;
-      var amount = parseInt($("#amount").text());
-      await setAmount(amount).send({ from: this.account });
+      if (checkStatus == true) {
+        const { setAmount } = this.resale.methods;
+        // var amount = parseInt($("#amount").val());
+        var amount = parseInt($("#amount").text());
+        await setAmount(amount).send({ from: this.account });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -228,8 +301,16 @@ const App = {
     try {
       const { web3 } = this;
       const { transfer } = this.resale.methods;
-      var amount = parseInt($("#amount").text()) * 11 / 10;
+      var amount = parseInt($("#amount").text());
+      amount = amount * 1.05;
+      // var amount = parseInt($("#amount").val());
+      // var seller = $('seller').text();
+      // var sellerAmount = amount * 0.95;
+      // var platformAmount = amount * 0.1;
+      // const platform = '0x4190C332e7D40bF2E7A370Bbc836F5b8832CB326';
       amount = amount.toString();
+      // await web3.eth.sendTransaction({from: this.account, value: web3.utils.toWei(sellerAmount, 'ether'), to: seller});
+      // await web3.eth.sendTransaction({from: this.account, value: web3.utils.toWei(platformAmount, 'ether'), to: platform});
       await transfer().send({ from: this.account, value: web3.utils.toWei(amount, 'ether') });
       checkStatus = false;
     } catch(error) {

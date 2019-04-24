@@ -105,6 +105,7 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap-4.0.0.js"></script>
     <script src="js/main.js"></script>
+    <script src="./dist/js/index.js"></script>
         </main>
     </div>
 
