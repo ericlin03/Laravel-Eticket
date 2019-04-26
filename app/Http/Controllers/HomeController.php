@@ -97,7 +97,7 @@ class HomeController extends Controller
         $this->middleware('auth');
         $user = Auth::user();
         $wallet = $user->wallet;
-        $area = DB::select('select tick_area, type, tick_seat, prog_name, prog_id, ticket_id, tick_price from program_seat where status=\'resale\'');
+        $area = DB::select('select section, type, tick_seat, prog_name, prog_id, ticket_id, tick_price from program_seat where status=\'resale\'');
         foreach($area as $p) {
             $price = $p->tick_price * 1.05;
         }
@@ -137,7 +137,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $wallet = $user->wallet;
         $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
-        $area = DB::select('select tick_area, type, tick_seat, prog_name, status, ticket_id, prog_id from program_seat where owner_id=?', [$wallet]);
+        $area = DB::select('select section, type, tick_seat, prog_name, status, ticket_id, prog_id from program_seat where owner_id=?', [$wallet]);
         return view('orders',compact('act','area'));
     }
 
@@ -154,30 +154,50 @@ class HomeController extends Controller
         $user = Auth::user();
         $wallet = $user->wallet;
         $progName = $request->input('prog_name');
-        $seat = DB::select('SELECT * FROM program_seat WHERE prog_name=?',[$progName]);
-        foreach($seat as $p) {
-            if ($p->status != "sold" && $p->status != "resale") {
-                $ticket_id = $p->ticket_id;
-                $prog_id = $p->prog_id;
-                $act = DB::select('select * from program where prog_id=?',[$p->prog_id]);
-                $area = DB::select('select tick_price, type from program_seat where ticket_id=?',[$p->ticket_id]);
-                break;
-            } else {
-                echo "<p>票已售罄</p>";
-            }
+        $act = DB::select('select * from program where prog_name=?',[$progName]);
+        $section = DB::select('SELECT section FROM program WHERE prog_name=?',[$progName]);
+        // $var = is_string($section) ? 'Yes' : 'No';
+        $section = (array)$section[0];
+        $section = json_encode($section);
+        $section = json_decode($section);
+        $section = $section->{'section'};
+        $sections = explode(",", $section);
+        $sectionSize = sizeof($sections);
+        foreach($act as $p) {
+            $prog_id = $p->prog_id;
         }
-        return view('payment-step1', compact('act', 'area', 'ticket_id', 'prog_id'));
+        // $seat = DB::select('SELECT * FROM program_seat WHERE prog_name=?',[$progName]);
+        // foreach($seat as $p) {
+        //     if ($p->status != "sold" && $p->status != "resale") {
+        //         $ticket_id = $p->ticket_id;
+        //         $prog_id = $p->prog_id;
+        //         $area = DB::select('select tick_price, type from program_seat where ticket_id=?',[$p->ticket_id]);
+        //         break;
+        //     } else {
+        //         echo "<p>票已售罄</p>";
+        //     }
+        // }
+        return view('payment-step1', compact('act', 'prog_id', 'sections', 'sectionSize'));
     }
 
     public function payment(Request $request) {
         $this->middleware('auth');
         $user = Auth::user();
         $wallet = $user->wallet;
-        $ticket_id = $request->input('ticket_id');
         $prog_id = $request->input('prog_id');
-        $act = DB::select('select * from program where prog_id=?',[$prog_id]);
-        $area = DB::select('select tick_price, type, owner_id from program_seat where ticket_id=?',[$ticket_id]);
-        return view('payment-step2',compact('act','area', 'wallet', 'ticket_id', 'prog_id'));
+        $section = $request->input('section');
+        $act = DB::select('SELECT * FROM program WHERE prog_id=?',[$prog_id]);
+        $seat = DB::select('SELECT * FROM program_seat WHERE prog_id=:prog_id AND section=:section',['prog_id'=>$prog_id, 'section'=>$section]);
+        foreach($seat as $p) {
+            if ($p->status != "sold" && $p->status != "resale") {
+                $ticket_id = $p->ticket_id;
+                $area = DB::select('select * from program_seat where ticket_id=?',[$ticket_id]);
+                break;
+            } else {
+                echo "<p>票已售罄</p>";
+            }
+        }
+        return view('payment-step2',compact('act','area', 'wallet', 'ticket_id', 'prog_id', 'section'));
     }
 
     public function updateOwner(Request $request) {
@@ -239,7 +259,7 @@ class HomeController extends Controller
         $ticket_id = $_GET['ticket_id'];
         $prog_id = $_GET['prog_id'];
         $act = DB::select('select * from program where prog_id=?',[$prog_id]);
-        $area = DB::select('select tick_price, type, tick_area, tick_seat from program_seat where ticket_id=?',[$ticket_id]);
+        $area = DB::select('select tick_price, type, section, tick_seat from program_seat where ticket_id=?',[$ticket_id]);
         foreach($area as $p){
             $price = $p->tick_price * 0.95;
         }

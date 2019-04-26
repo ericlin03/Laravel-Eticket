@@ -32,7 +32,7 @@
             <tr>
             <tr class="table-info">
               <td><font color="black">{{ $resale->type }}</td>
-              <td><font color="black">{{ $resale->tick_area }}</td>
+              <td><font color="black">{{ $resale->section }}</td>
               <td><font color="black">{{ $resale->tick_seat }}</td>
               <td><font color="black">{{ $price }}</td>
             <tr>

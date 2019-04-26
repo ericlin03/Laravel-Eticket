@@ -32,31 +32,35 @@
   </h5>
   <div class="card-body">
     <h5 class="card-title"></h5>
-    <p class="card-text" font size="5">活動時間:{{$program->prog_date}}</p>
-    <p class="card-text">場地:{{$program->site_name}}</p>
-    <p class="card-text">活動主辦:{{$program->prog_organizer}}</p>
+    <p class="card-text" font size="5">活動時間：{{$program->prog_date}}</p>
+    <p class="card-text">場地：{{$program->site_name}}</p>
+    <p class="card-text">活動主辦：{{$program->prog_organizer}}</p>
   </div>
 </div>
 <img src="img/座位表.jpg" height="500" style="display:block; margin:auto;">
+<form method="get" action="payment">
 <table class="table table-striped">
 　<tr>
 　<th>票券類別</th>
-　<th>票券區域</th>
-　<th>票價</th>
+　<th>請選擇區域</th>
 　</tr>
 <tr>
-  @foreach($area as $area)
-　<td>{{$area->type}}</td>
-　<td>不分區隨機挑選</td>
-　<td>{{$area->tick_price}}</td>  
-  @endforeach
+　<td>全票</td>
+　<td>
+    <form method="get" action="payment">
+    <p>
+      <select name="section">
+        @for($i = 0; $i < $sectionSize; $i++)
+        <option value="{{ $sections[$i] }}">{{ $sections[$i] }}</option>
+        @endfor
+      </select>
+    </p>
+  </td> 
 </tr>
 </table>
 <div align="center">
-  <form method="get" action="payment">
     <button type="submit" class="btn btn-outline-danger">下一步</button>
-    <input type="text" name="ticket_id" style="display:none" value="{{ $ticket_id }}" />
-    <input type="text" name="prog_id" style="display:none" value="{{ $prog_id }}" />
+    <input type="text" name="prog_id" value="{{ $prog_id }}" style="display:none">
   </form>
 </div>
 </div>

@@ -42,25 +42,23 @@
 　<tr>
 　<th>票券類別</th>
 　<th>票券區域</th>
-　<th>票價</th>
 　</tr>
 <tr>
-  @foreach($area as $area)
-　<td>{{$area->type}}</td>
-　<td>不分區隨機挑選</td>
-　<td>{{$area->tick_price}}</td>
-  @endforeach
+　<td>全票</td>
+　<td>{{ $section }}</td>
 </tr>
 </table>
 </div>
 <div id="menu1" class="container tab-pane active">
-    <p>總金額：</p><p id="amount">{{$area->tick_price}}</p>
-    <p>付款地址：</p><p id="wallet">{{$wallet}}</p>
+    @foreach($area as $area)
+    <p>總金額：</p><p id="amount">{{ $area->tick_price }}</p>
+    @endforeach
+    <p>付款地址：</p><p id="wallet">{{ $wallet }}</p>
     @if(count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
         @foreach($errors->all() as $error)
-            <li>{{$error}}</li>
+            <li>{{ $error }}</li>
         @endforeach
         </ul>
     </div>

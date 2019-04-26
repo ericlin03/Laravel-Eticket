@@ -32,7 +32,7 @@
             <tr>
             <tr class="table-info">
               <td><font color="black">{{$order->type}}</td>
-              <td><font color="black">{{$order->tick_area}}</td>
+              <td><font color="black">{{$order->section}}</td>
               <td><font color="black">{{$order->tick_seat}}</td>
               <td>
                 @if($order->status == 'sold')

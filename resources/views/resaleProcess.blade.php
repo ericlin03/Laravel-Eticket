@@ -42,7 +42,7 @@
         </tr>
         <tr>
             <td><font style=font-weight:bold;>區域</td>
-            <td>{{ $area->tick_area }}</td>
+            <td>{{ $area->section }}</td>
         </tr>
         <tr>
             <td><font style=font-weight:bold;>座位</td>
