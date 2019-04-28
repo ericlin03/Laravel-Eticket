@@ -137,7 +137,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $wallet = $user->wallet;
         $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
-        $area = DB::select('select section, type, tick_seat, prog_name, status, ticket_id, prog_id from program_seat where owner_id=?', [$wallet]);
+        $area = DB::select('select * from program_seat where owner_id=?', [$wallet]);
         return view('orders',compact('act','area'));
     }
 

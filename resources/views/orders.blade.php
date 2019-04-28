@@ -29,6 +29,7 @@
               <th><font color="black">區域</th>
               <th><font color="black">座位</th>
               <th><font color="black">票卷狀態</th>
+              <th><font color="black">入場憑證</th>
             <tr>
             <tr class="table-info">
               <td><font color="black">{{$order->type}}</td>
@@ -41,6 +42,7 @@
                 <font color="red">待轉售
                 @endif
               </td>
+              <td>{!! QrCode::size(100)->encoding('UTF-8')->generate('擁有者:'.$order->owner_id.'活動名稱:'.$order->prog_name.'區域:'.$order->section.'位置:'.$order->tick_seat);!!}</td>
             <tr>
           </table>
           @if($order->status == 'sold')
