@@ -226,7 +226,10 @@
               <p class="card-text">場地:{{"$program->site_name"}}</p>
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              <button style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
+              <form method="get" action="buyOneTicket">
+                <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
+                <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
+              </form>
               <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph2').src='images/success-cart.png'" ><img id="ph2" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
               </button>
             </div>

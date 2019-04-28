@@ -140,10 +140,10 @@
     $("#setAmount").hide();
     $("#setSeller").hide();
 
-    $("#checkButton").click(function(){
-      $("#checkButton").hide();
-      $("#setAmount").show();
-    });
+    // $("#checkButton").click(function(){
+    //   $("#checkButton").hide();
+    //   $("#setAmount").show();
+    // });
 
     $("#setAmount").click(function(){
       $("#setAmount").hide();

@@ -154,7 +154,7 @@ const App = {
       checkStatus = true;
       alert('錢包位址正確！');
     } else {
-      alert('錢包地址與個人資料不相符');
+      alert('錢包地址與個人資料不相符，請確認MetaMask帳號與付款地址相同，確認完後請重新整理。');
     }
   },
 
@@ -228,6 +228,7 @@ const App = {
     if (this.account == $('#wallet').text()){
       checkStatus = true;
       alert('錢包位址正確');
+      $("#setAmount").show();
       // var status = confirm('確定要購買此二手票卷嗎？');
       // if (status == true) {
       //   this.setAmount();
@@ -240,7 +241,7 @@ const App = {
     } else {
       console.log($('#wallet').text());
       console.log(this.account);
-      alert('錢包地址與個人資料不相符');
+      alert('錢包地址與個人資料不相符，請確認MetaMask帳號與付款地址相同，確認完後請重新整理。');
     }
 
     // if (checkStatus == true) {
