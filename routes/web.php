@@ -75,6 +75,8 @@ Route::get('resaleTicket', 'HomeController@resaleTicket');
 
 Route::get('resalePayment', 'HomeController@resalePayment');
 
+Route::post('changeOwner', 'HomeController@changeOwner');
+
 Route::get('resaleProcess', 'HomeController@resaleProcess');
 
 Route::post('resaleUpdate', 'HomeController@resaleUpdate');

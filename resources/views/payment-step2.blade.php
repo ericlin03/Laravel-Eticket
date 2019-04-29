@@ -24,6 +24,7 @@
     
 <div class="tab-content">
 <div id="home" class="tab-pane fade">
+  <br>
 <div class="card">
   <h5 class="card-header">
     @foreach($act as $program)
@@ -50,10 +51,19 @@
 </table>
 </div>
 <div id="menu1" class="container tab-pane active">
-    @foreach($area as $area)
-    <p>總金額：</p><p id="amount">{{ $area->tick_price }}</p>
-    @endforeach
-    <p>付款地址：</p><p id="wallet">{{ $wallet }}</p>
+  <br>
+  <table class="table table-striped">
+    <tr class="table-warning">
+      @foreach($area as $area)
+      <td>總金額：</td>
+      <td id="amount">{{ $area->tick_price }}</td>
+    </tr>
+    <tr class="table-danger">
+      <td>付款錢包地址：</td>
+      <td id="wallet">{{ $wallet }}</td>
+      @endforeach
+    </tr>
+  </table>
     @if(count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
@@ -71,16 +81,18 @@
         </div>
     </form> -->
 
-    
-    <button id="checkButton" onclick="App.checkStatus()" class="btn btn-outline-primary">檢查錢包</button>
+    <hr>
+    <div align="center">
+      <button id="checkButton" onclick="App.checkStatus()" class="btn btn-outline-primary">檢查錢包</button>
     <!-- <button onclick="App.buy();App.jumpToStep3()" class="btn btn-outline-danger">確認付款</button> -->
 
-    <form method="post" action="updateOwner">
-    {{csrf_field()}}
-      <button id="submitButton" type="submit" onclick="App.buy()" class="btn btn-outline-danger">確認付款</button>
-      <input type="text" name="ticket_id" value="{{ $ticket_id }}" style="display:none" />
-      <input type="text" name="prog_id" value="{{ $prog_id }}" style="display:none" />
-    </form>
+      <form method="post" action="updateOwner">
+      {{csrf_field()}}
+        <button id="submitButton" type="submit" onclick="App.buy()" class="btn btn-outline-danger">確認付款</button>
+        <input type="text" name="ticket_id" value="{{ $ticket_id }}" style="display:none" />
+        <input type="text" name="prog_id" value="{{ $prog_id }}" style="display:none" />
+      </form>
+    </div>
     <!-- <button type="submit" class="btn btn-outline-danger" onclick="App.buy();App.jumpToStep3()">確認付款</button> -->
     <!-- <p id="wallet">0x71b50f3c3fe9B5701CAB53487330b91c1a9C816a</p> -->
     <!-- <div align="center"><button type="submit" value="Edit" onclick="App.buy()" class="btn btn-outline-danger">確認付款</button></div> -->

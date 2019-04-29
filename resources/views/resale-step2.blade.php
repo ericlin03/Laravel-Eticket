@@ -24,6 +24,7 @@
     
 <div class="tab-content">
 <div id="home" class="tab-pane fade">
+  <br>
 <div class="card">
   <h5 class="card-header">
     @foreach($act as $program)
@@ -46,16 +47,35 @@
 　</tr>
 <tr>
   @foreach($area as $area)
-　<td>{{$area->type}}</td>
-　<td>不分區隨機挑選</td>
-　<td>{{$area->tick_price}}</td>
+　<td>{{ $area->type }}</td>
+　<td>{{ $area->section }}</td>
+　<td>{{ $area->tick_price }}</td>
   @endforeach
 </tr>
 </table>
 </div>
 <div id="menu1" class="container tab-pane active">
-    <p>總金額：</p><p id="amount">{{ $area->tick_price }}</p>
-    <p>付款地址：</p><p id="wallet">{{ $wallet }}</p>
+  <br>
+  <table class="table table-striped">
+    <tr class="table-info">
+      <td>原本金額：</td>
+      <td>{{ $orginalPrice }}</td>
+    </tr>
+    <tr class="table-info">
+      <td>手續費：</td>
+      <td>{{ $fee }}</td>
+    </tr>
+    <tr class="table-warning">
+      <td>總金額：</td>
+      <td id="amount">{{ $price }}</td>
+    </tr>
+    <tr class="table-danger">
+      <td>付款錢包地址：</td>
+      <td id="wallet">{{ $wallet }}</td>
+    </tr>
+  </table>
+  <hr>
+  <div align="center">
     <p id="seller" style="display:none">{{ $area->owner_id }}</p>
     @if(count($errors) > 0)
     <div class="alert alert-danger">
@@ -71,13 +91,13 @@
     <button id="setSeller" onclick="App.setSeller()" class="btn btn-outline-success">確認賣家</button>
     <!-- <button class="btn btn-outline-danger" onclick="App.transfer();App.jumpToResaleStep3()">確認付款</button> -->
 
-    <form method="post" action="updateOwner">
+    <form method="post" action="changeOwner">
     {{csrf_field()}}
       <button id="submitButton" type="submit" onclick="App.transfer()" class="btn btn-outline-danger">確認付款</button>
       <input type="text" name="ticket_id" value="{{ $ticket_id }}" style="display:none" />
       <input type="text" name="prog_id" value="{{ $prog_id }}" style="display:none" />
     </form>
-    
+</div>
     <!-- <p id="wallet">0x71b50f3c3fe9B5701CAB53487330b91c1a9C816a</p> -->
     <!-- <div align="center"><button type="submit" value="Edit" onclick="App.buy()" class="btn btn-outline-danger">確認付款</button></div> -->
 </div>

@@ -24,6 +24,7 @@
 
 <div class="tab-content">
 <div id="home" class="tab-pane fade">
+  <br>
 <div class="card">
   <h5 class="card-header">
     @foreach($act as $program)
@@ -46,23 +47,40 @@
 　</tr>
 <tr>
   @foreach($area as $area)
-　<td>{{$area->type}}</td>
-　<td>不分區隨機挑選</td>
-　<td>{{$area->tick_price}}</td>  
+　<td>{{ $area->type }}</td>
+　<td>{{ $area->section }}</td>
+　<td>{{ $price }}</td>  
   @endforeach
 </tr>
 </table>
 </div>
 <div id="menu1" class="tab-pane fade">
-<p>總金額：</p><p id="amount">{{$area->tick_price}}</p>
-    <p>付款地址：</p><p id="wallet">{{$wallet}}</p>
+<br>
+  <table class="table table-striped"> 
+    <tr class="table-info">
+      <td>原本金額：</td>
+      <td>{{ $orginalPrice }}</td>
+    </tr>
+    <tr class="table-info">
+      <td>手續費：</td>
+      <td>{{ $fee }}</td>
+    </tr>
+    <tr class="table-warning">
+      <td>總金額：</td>
+      <td id="amount">{{ $price }}</td>
+    </tr>
+    <tr class="table-danger">
+      <td>付款錢包地址：</td>
+      <td id="wallet">{{ $wallet }}</td>
+    </tr>
+  </table>
 </div>
 <div id="menu2" class="container tab-pane active" align="center">
     <br><br>
     <h3><strong>在 MetaMask 按下 'CONFIRM' 就完成付款囉！</strong></h3>
     <br>
     <h5>處理過程中需要等待，付款完成後票卷資訊會顯示在個人訂單中</h5>
-    <br><br>
+    <br><hr>
     <div align="center"><button class="btn btn-outline-info" onclick="javascript:location.replace('./home')">回首頁</button></div>
 </div>
 </div>

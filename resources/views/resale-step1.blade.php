@@ -24,6 +24,7 @@
     
 <div class="tab-content">
 <div id="home" class="container tab-pane active">
+<br>
 <div class="card">
   <h5 class="card-header">
     @foreach($act as $program)
@@ -47,11 +48,12 @@
 <tr>
   @foreach($area as $area)
 　<td>{{ $area->type }}</td>
-　<td>不分區隨機挑選</td>
+　<td>{{ $area->section }}</td>
 　<td>{{ $price }}</td>  
   @endforeach
 </tr>
 </table>
+<hr>
 <div align="center">
   <form method="get" action="resalePayment">
     <button type="submit" class="btn btn-outline-danger">下一步</button>

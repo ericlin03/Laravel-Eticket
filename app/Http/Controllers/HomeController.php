@@ -207,7 +207,7 @@ class HomeController extends Controller
         $ticket_id = $_POST['ticket_id'];
         $prog_id = $_POST['prog_id'];
         $act = DB::select('select * from program where prog_id=?',[$prog_id]);
-        $area = DB::select('select tick_price, type from program_seat where ticket_id=?',[$ticket_id]);
+        $area = DB::select('select * from program_seat where ticket_id=?',[$ticket_id]);
         DB::table('program_seat')->where('ticket_id', $ticket_id)->update(['owner_id' => $wallet, 'status' => 'sold']);
         return view('payment-step3', compact('act', 'area', 'wallet'));
     }
@@ -219,7 +219,7 @@ class HomeController extends Controller
         $ticket_id = $request->input('ticket_id');
         $prog_id = $request->input('prog_id');
         $act = DB::select('select * from program where prog_id=?',[$prog_id]);
-        $area = DB::select('select tick_price, type from program_seat where ticket_id=?',[$ticket_id]);
+        $area = DB::select('select tick_price, type, section from program_seat where ticket_id=?',[$ticket_id]);
         foreach($area as $p) {
             $price = $p->tick_price * 1.05;
         }
@@ -233,11 +233,13 @@ class HomeController extends Controller
         $ticket_id = $request->input('ticket_id');
         $prog_id = $request->input('prog_id');
         $act = DB::select('select * from program where prog_id=?',[$prog_id]);
-        $area = DB::select('select tick_price, type, owner_id from program_seat where ticket_id=?',[$ticket_id]);
+        $area = DB::select('select tick_price, type, owner_id, section from program_seat where ticket_id=?',[$ticket_id]);
         foreach($area as $p) {
             $price = $p->tick_price * 1.05;
+            $orginalPrice = $p->tick_price;
+            $fee = $p->tick_price * 0.05;
         }
-        return view('resale-step2',compact('act','area', 'wallet', 'ticket_id', 'prog_id', 'price'));
+        return view('resale-step2',compact('act','area', 'wallet', 'ticket_id', 'prog_id', 'price', 'orginalPrice', 'fee'));
     }
 
     public function changeOwner(Request $request) {
@@ -247,9 +249,14 @@ class HomeController extends Controller
         $ticket_id = $_POST['ticket_id'];
         $prog_id = $_POST['prog_id'];
         $act = DB::select('select * from program where prog_id=?',[$prog_id]);
-        $area = DB::select('select tick_price, type from program_seat where ticket_id=?',[$ticket_id]);
+        $area = DB::select('select * from program_seat where ticket_id=?',[$ticket_id]);
         DB::table('program_seat')->where('ticket_id', $ticket_id)->update(['owner_id' => $wallet, 'status' => 'sold']);
-        return view('resale-step3', compact('act', 'area', 'wallet'));
+        foreach($area as $p) {
+            $price = $p->tick_price * 1.05;
+            $orginalPrice = $p->tick_price;
+            $fee = $p->tick_price * 0.05;
+        }
+        return view('resale-step3', compact('act', 'area', 'wallet', 'price', 'orginalPrice', 'fee'));
     }
 
     public function resaleProcess(Request $request) {
@@ -273,11 +280,11 @@ class HomeController extends Controller
         $ticket_id = $_POST['ticket_id'];
         $area = DB::select('select * from program_seat where ticket_id=?',[$ticket_id]);
         foreach($area as $p){
-            DB::tabel('ledger')->insert(
+            DB::table('ledger')->insert(
                 ['eventType' => '轉售',
                 'buyer' => $wallet,
-                'seller' => $p->owner,
-                'amount' => $p->amount,
+                'seller' => $p->owner_id,
+                'amount' => $p->tick_price,
                 'prog_id' => $p->prog_id,
                 'date' => date("Y/m/d")
                 ]

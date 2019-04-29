@@ -37,6 +37,7 @@
         </button>
     </div>
     </div>
+    <hr>
 </div>
 @endforeach
 </div>

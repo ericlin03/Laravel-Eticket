@@ -1,4 +1,4 @@
-@extends('layouts.app2')
+@extends('layouts.app')
 @section('content')
 
 <div class="container mt-3">
@@ -49,8 +49,8 @@
         </div>
       </div>
     </div>
+  <hr>
 </div>
-<hr>
 @endforeach
 </div>
 

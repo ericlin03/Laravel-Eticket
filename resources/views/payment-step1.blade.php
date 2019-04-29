@@ -24,6 +24,7 @@
     
 <div class="tab-content">
 <div id="home" class="container tab-pane active">
+<br>
 <div class="card">
   <h5 class="card-header">
     @foreach($act as $program)
@@ -58,6 +59,7 @@
   </td> 
 </tr>
 </table>
+<hr>
 <div align="center">
     <button type="submit" class="btn btn-outline-danger">下一步</button>
     <input type="text" name="prog_id" value="{{ $prog_id }}" style="display:none">
