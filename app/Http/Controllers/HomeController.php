@@ -251,6 +251,7 @@ class HomeController extends Controller
         $act = DB::select('select * from program where prog_id=?',[$prog_id]);
         $area = DB::select('select * from program_seat where ticket_id=?',[$ticket_id]);
         DB::table('program_seat')->where('ticket_id', $ticket_id)->update(['owner_id' => $wallet, 'status' => 'sold']);
+        DB::table('ledger')->where('ticket_id', $ticket_id)->update(['buyer' => $wallet]);
         foreach($area as $p) {
             $price = $p->tick_price * 1.05;
             $orginalPrice = $p->tick_price;
@@ -282,7 +283,7 @@ class HomeController extends Controller
         foreach($area as $p){
             DB::table('ledger')->insert(
                 ['eventType' => '轉售',
-                'buyer' => $wallet,
+                'ticket_id' => $ticket_id,
                 'seller' => $p->owner_id,
                 'amount' => $p->tick_price,
                 'prog_id' => $p->prog_id,

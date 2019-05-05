@@ -70,7 +70,7 @@
 @endforeach
 
 <!-- footer -->
-<hr>
+
 <div class=" text-white bg-dark p-4">
           <div class="row text-center col-12">
             <div class="col-sm-12 col-md-12 col-lg-12 col-12">
