@@ -70,9 +70,6 @@
                                 </li>
                             @endif
                         @else
-                        <li class="nav-item">
-            <a class="nav-link ecolor" href="#" data-toggle="tooltip" data-placement="bottom" title="我的收藏"><img src="images/shopping-cart.png" width="30" height="30" class="d-inline-block align-top" alt=""></a>
-            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

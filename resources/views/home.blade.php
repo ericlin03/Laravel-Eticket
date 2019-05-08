@@ -83,17 +83,6 @@
       </div>
     </div>
 
-    <hr>
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-12">
-          <button  href="#" style="padding:30px; border-width:3px; margin:5px; margin-left:235px;" class="btn btn col-2"><img src="images/mic.png" width="50" height="50" class="d-inline-block align-top" alt=""><br><br><h4>演唱會</h4></button>
-          <button  href="#" style="padding:30px; border-width:3px; margin:5px;" class="btn btn col-2"><img src="images/exercise.png" width="50" height="50" class="d-inline-block align-top" alt=""><br><br><h4>體育</h4></button>
-          <button  href="#" style="padding:30px; border-width:3px; margin:5px;" class="btn btn col-2"><img src="images/exhi.png" width="50" height="50" class="d-inline-block align-top" alt=""><br><br><h4>展覽</h4></button>
-          <button  href="#" class="btn btn-light col-2"><h4>　全部 》</h4></button>
-        </div>
-      </div>
-    </div>
     <div class="container">
     <hr><br>
     <span style="font-weight:bold; color:#5F9EA0; font-size:22px;">最新公告</span>
@@ -135,8 +124,36 @@
       <div class="row text-center">
       @foreach($data as $program)
         <div class="col-md-4 pb-1 pb-md-0">
-          <div class="card">
-            <img class="card-img-top" src="{{$program->img }}"  height="180" alt="Card image cap">
+        <div class="card h-100">
+            <img class="card-img-top" src="{{$program->img }}"  height="180" alt="Card image cap" data-toggle="modal" data-target=".bd-example-modal-lg">
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{"$program->prog_name"}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <img class="card-img-top" src="{{$program->img }}"  height="400" alt="Card image cap">
+      <br>
+      <br>
+      <p>{{"$program->prog_content"}}</p>
+      <br>
+      <br>
+      <p>售票時間:{{"$program->prog_selldate"}}</p>
+      <p>票價分類:{{"$program->prog_price"}}</p>
+      <p>場地:{{"$program->site_name"}}</p>
+      <p>演出時間:{{"$program->prog_date"}}</p>
+      <img src="{{$program->imgprice }}"  height="500" alt="Card image cap">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
             <div class="card-body">
      
               <h5 class="card-title">{{"$program->prog_name"}}</h5>
@@ -149,16 +166,42 @@
                 <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
                 <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
               </form>
-              <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph1').src='images/success-cart.png'" ><img id="ph1" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              </button>
             </div>
           </div>
         </div>
         @endforeach
         @foreach($data2 as $program)
         <div class="col-md-4 pb-1 pb-md-0">
-          <div class="card">
-            <img class="card-img-top" src="{{$program->img }}" height="180" alt="Card image cap">
+        <div class="card h-100">
+          <img class="card-img-top" src="{{$program->img }}" height="180" alt="Card image cap" data-toggle="modal"  href="#2" >
+            <div class="modal fade bd-example-modal-lg" id="2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" id="2">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{"$program->prog_name"}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <img class="card-img-top" src="{{$program->img }}"  height="400" alt="Card image cap">
+      <br>
+      <br>
+      <p>{{"$program->prog_content"}}</p>
+      <br>
+      <br>
+      <p>售票時間:{{"$program->prog_selldate"}}</p>
+      <p>票價分類:{{"$program->prog_price"}}</p>
+      <p>場地:{{"$program->site_name"}}</p>
+      <p>演出時間:{{"$program->prog_date"}}</p>
+      <img  src="{{$program->imgprice }}"  height="500"  alt="Card image cap">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
             <div class="card-body">
            
               <h5 class="card-title">{{"$program->prog_name"}}</h5>
@@ -170,16 +213,42 @@
                 <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
                 <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
               </form>
-              <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph2').src='images/success-cart.png'" ><img id="ph2" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              </button>
             </div>
           </div>
         </div>
         @endforeach
         @foreach($data3 as $program)
         <div class="col-md-4 pb-1 pb-md-0">
-          <div class="card">
-            <img class="card-img-top" src="{{$program->img }}" height="180" alt="Card image cap">
+        <div class="card h-100">
+        <img class="card-img-top" src="{{$program->img }}"  height="180" alt="Card image cap" data-toggle="modal"  href="#8">
+            <div class="modal fade bd-example-modal-lg" id="8" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" id="8">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{"$program->prog_name"}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <img class="card-img-top" src="{{$program->img }}"  height="400" alt="Card image cap">
+      <br>
+      <br>
+      <p>{{"$program->prog_content"}}</p>
+      <br>
+      <br>
+      <p>售票時間:{{"$program->prog_selldate"}}</p>
+      <p>票價分類:{{"$program->prog_price"}}</p>
+      <p>場地:{{"$program->site_name"}}</p>
+      <p>演出時間:{{"$program->prog_date"}}</p>
+      <img  src="{{$program->imgprice }}"  height="500"  alt="Card image cap">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
             <div class="card-body">
             
               <h5 class="card-title">{{"$program->prog_name"}}</h5>
@@ -191,7 +260,6 @@
                 <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
                 <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
               </form>
-              </button>
             </div>
           </div>
         </div>
@@ -200,8 +268,36 @@
       @foreach($data4 as $program)
       <div class="row text-center mt-4">
         <div class="col-md-4 pb-1 pb-md-0">
-          <div class="card">
-            <img class="card-img-top" src="{{$program->img }}" height="180" alt="Card image cap">
+        <div class="card h-100">
+        <img class="card-img-top" src="{{$program->img }}"  height="180" alt="Card image cap" data-toggle="modal"  href="#5">
+            <div class="modal fade bd-example-modal-lg" id="5" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" id="5">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{"$program->prog_name"}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <img class="card-img-top" src="{{$program->img }}"  height="400" alt="Card image cap">
+      <br>
+      <br>
+      <p>{{"$program->prog_content"}}</p>
+      <br>
+      <br>
+      <p>售票時間:{{"$program->prog_selldate"}}</p>
+      <p>票價分類:{{"$program->prog_price"}}</p>
+      <p>場地:{{"$program->site_name"}}</p>
+      <p>演出時間:{{"$program->prog_date"}}</p>
+      <img src="{{$program->imgprice }}"  height="500"  alt="Card image cap">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
             <div class="card-body">
             
               <h5 class="card-title">{{"$program->prog_name"}}</h5>
@@ -213,16 +309,42 @@
                 <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
                 <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
               </form>
-              <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph4').src='images/success-cart.png'" ><img id="ph4" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              </button>
             </div>
           </div>
         </div>
         @endforeach
         @foreach($data5 as $program)
         <div class="col-md-4 pb-1 pb-md-0">
-          <div class="card">
-            <img class="card-img-top" src="{{$program->img }}" height="180" alt="Card image cap">
+        <div class="card h-100">
+        <img class="card-img-top" src="{{$program->img }}"  height="180" alt="Card image cap" data-toggle="modal"  href="#6">
+            <div class="modal fade bd-example-modal-lg" id="6" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" id="6">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{"$program->prog_name"}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <img class="card-img-top" src="{{$program->img }}"  height="400" alt="Card image cap">
+      <br>
+      <br>
+      <p>{{"$program->prog_content"}}</p>
+      <br>
+      <br>
+      <p>售票時間:{{"$program->prog_selldate"}}</p>
+      <p>票價分類:{{"$program->prog_price"}}</p>
+      <p>場地:{{"$program->site_name"}}</p>
+      <p>演出時間:{{"$program->prog_date"}}</p>
+      <img src="{{$program->imgprice }}"  height="500" alt="Card image cap">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
             <div class="card-body">
             
               <h5 class="card-title">{{"$program->prog_name"}}</h5>
@@ -234,16 +356,42 @@
                 <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
                 <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
               </form>
-              <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph5').src='images/success-cart.png'" ><img id="ph5" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              </button>
             </div>
           </div>
         </div>
         @endforeach
         @foreach($data6 as $program)
         <div class="col-md-4 pb-1 pb-md-0">
-          <div class="card">
-            <img class="card-img-top" src="{{$program->img }}" height="180" alt="Card image cap">
+        <div class="card h-100">
+        <img class="card-img-top" src="{{$program->img }}"  height="180" alt="Card image cap" data-toggle="modal"  href="#7">
+            <div class="modal fade bd-example-modal-lg" id="7" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" id="7">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{"$program->prog_name"}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <img class="card-img-top" src="{{$program->img }}"  height="400" alt="Card image cap">
+      <br>
+      <br>
+      <p>{{"$program->prog_content"}}</p>
+      <br>
+      <br>
+      <p>售票時間:{{"$program->prog_selldate"}}</p>
+      <p>票價分類:{{"$program->prog_price"}}</p>
+      <p>場地:{{"$program->site_name"}}</p>
+      <p>演出時間:{{"$program->prog_date"}}</p>
+      <img src="{{$program->imgprice }}"  height="500" alt="Card image cap">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
             <div class="card-body">
             
               <h5 class="card-title">{{"$program->prog_name"}}</h5>
@@ -255,25 +403,53 @@
                 <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
                 <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
               </form>
-              <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph6').src='images/success-cart.png'" ><img id="ph6" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              </button>
             </div>
           </div>
         </div>
         @endforeach
-      </div>
-    </div>
-    </div>
-    <div id="menu1" class="container tab-pane fade"><br>
+        </div>
+        </div>
+        </div>
+        <div id="menu1" class="container tab-pane fade"><br>
     <div class="container">
       <div class="row text-center">
+        @foreach($data7 as $program)
         <div class="col-md-4 pb-1 pb-md-0">
-          <div class="card">
-            <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
+        <div class="card h-100">
+        <img class="card-img-top" src="{{$program->img }}"  height="180" alt="Card image cap" data-toggle="modal"  href="#9">
+            <div class="modal fade bd-example-modal-lg" id="9" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" id="9">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{"$program->prog_name"}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <img class="card-img-top" src="{{$program->img }}"  height="400" alt="Card image cap">
+      <br>
+      <br>
+      <p>{{"$program->prog_content"}}</p>
+      <br>
+      <br>
+      <p>售票時間:{{"$program->prog_selldate"}}</p>
+      <p>票價分類:{{"$program->prog_price"}}</p>
+      <p>場地:{{"$program->site_name"}}</p>
+      <p>演出時間:{{"$program->prog_date"}}</p>
+      <img src="{{$program->imgprice }}"  height="500"  alt="Card image cap">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
             <div class="card-body">
             
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 class="card-title">{{"$program->prog_name"}}</h5>
+              <p class="card-text">演出時間:{{"$program->prog_date"}}</p>
+              <p class="card-text">場地:{{"$program->site_name"}}</p>
             
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
@@ -281,43 +457,50 @@
                 <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
                 <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
               </form>
-              <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph7').src='images/success-cart.png'" ><img id="ph7" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              </button>
             </div>
           </div>
         </div>
+        @endforeach
+        @foreach($data7 as $program)
         <div class="col-md-4 pb-1 pb-md-0">
-          <div class="card">
-            <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
+          <div class="cardh-100">
+            <img class="card-img-top" src="{{$program->img }}"  height="180" alt="Card image cap">
             <div class="card-body">
             
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 class="card-title">{{"$program->prog_name"}}</h5>
+              <p class="card-text">演出時間:{{"$program->prog_date"}}</p>
+              <p class="card-text">場地:{{"$program->site_name"}}</p>
             
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
-              <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph8').src='images/success-cart.png'" ><img id="ph8" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              </button>
+              <form method="get" action="buyOneTicket">
+                <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
+                <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
+              </form>
             </div>
           </div>
         </div>
+        @endforeach
+        @foreach($data7 as $program)
         <div class="col-md-4 pb-1 pb-md-0">
-          <div class="card">
-            <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
+          <div class="card h-100">
+            <img class="card-img-top" src="{{$program->img }}"  height="180" alt="Card image cap">
             <div class="card-body">
             
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 class="card-title">{{"$program->prog_name"}}</h5>
+              <p class="card-text">演出時間:{{"$program->prog_date"}}</p>
+              <p class="card-text">場地:{{"$program->site_name"}}</p>
             
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              <button style="float:center" href="#" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
-              <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph9').src='images/success-cart.png'" ><img id="ph9" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              </button>
+              <form method="get" action="buyOneTicket">
+                <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
+                <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
+              </form>
             </div>
           </div>
         </div>
+        @endforeach
       </div>
       
       </div>
@@ -325,54 +508,66 @@
     <div id="menu2" class="container tab-pane fade"><br>
     <div class="container">
       <div class="row text-center">
+      @foreach($data7 as $program)
         <div class="col-md-4 pb-1 pb-md-0">
-          <div class="card">
-            <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
+          <div class="card h-100">
+            <img class="card-img-top" src="{{$program->img }}"  height="180" alt="Card image cap">
             <div class="card-body">
             
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 class="card-title">{{"$program->prog_name"}}</h5>
+              <p class="card-text">演出時間:{{"$program->prog_date"}}</p>
+              <p class="card-text">場地:{{"$program->site_name"}}</p>
             
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              <button style="float:center" onclick="location.href='{{ url('activity8') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
-              <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph13').src='images/success-cart.png'" ><img id="ph13" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              </button>
+              <form method="get" action="buyOneTicket">
+                <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
+                <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
+              </form>
             </div>
           </div>
         </div>
+        @endforeach
+        @foreach($data7 as $program)
         <div class="col-md-4 pb-1 pb-md-0">
-          <div class="card">
-            <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
+          <div class="card h-100">
+            <img class="card-img-top" src="{{$program->img }}"  height="180"alt="Card image cap">
             <div class="card-body">
             
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 class="card-title">{{"$program->prog_name"}}</h5>
+              <p class="card-text">演出時間:{{"$program->prog_date"}}</p>
+              <p class="card-text">場地:{{"$program->site_name"}}</p>
            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              <button style="float:center" onclick="location.href='{{ url('activity8') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
-              <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph14').src='images/success-cart.png'" ><img id="ph14" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              </button>
+              <form method="get" action="buyOneTicket">
+                <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
+                <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
+              </form>
             </div>
           </div>
         </div>
+        @endforeach
+        @foreach($data7 as $program)
         <div class="col-md-4 pb-1 pb-md-0">
-          <div class="card">
-            <img class="card-img-top" src="images/400X200.gif" alt="Card image cap">
+          <div class="card h-100">
+            <img class="card-img-top" src="{{$program->img }}"  height="180" alt="Card image cap">
             <div class="card-body">
             
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="card-title">{{"$program->prog_name"}}</h5>
+              <p class="card-text">演出時間:{{"$program->prog_date"}}</p>
+              <p class="card-text">場地:{{"$program->site_name"}}</p>
            
             <br>
               <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              <button style="float:center" onclick="location.href='{{ url('activity8') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
-              <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph15').src='images/success-cart.png'" ><img id="ph15" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
-              </button>
+              <form method="get" action="buyOneTicket">
+                <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
+                <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
+              </form>
             </div>
           </div>
         </div>
+         @endforeach
       </div>
       </div>
     </div>

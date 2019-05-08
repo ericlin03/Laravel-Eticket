@@ -4,7 +4,7 @@
 <br>
 <div style="margin-left: 45%; margin-top: 75px">
   <div>
-    <a color="blue" href="/buyingTicket">go buy ticket</a>
+    <button class="btn btn-outline-danger" onclick="location.href='{{ url('buyingTicket') }}'">go buy ticket</button>
   </div>
 </div>
 @endsection

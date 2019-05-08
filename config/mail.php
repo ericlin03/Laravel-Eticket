@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_USERNAME', 'wp405402508@im.fju.edu.tw'),
+        'name' => env('MAIL_FROM_NAME', 'Eticket'),
     ],
 
     /*
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => "wp405402508@im.fju.edu.tw",
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => "qdxFBSdV",
 
     /*
     |--------------------------------------------------------------------------

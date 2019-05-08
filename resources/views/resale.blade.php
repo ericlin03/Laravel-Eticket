@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 @section('content')
 
 <div class="container mt-3">
@@ -11,7 +11,7 @@
 
 <div class="container">
 @empty($area)
-<div><br><br><br><h3 style="color:red">伺服器出問題啦～～～塊陶啊～～～</h3><br><br><br></div>
+<div><br><br><br><h3 style="color:red">目前佔無人售出二手票卷，請稍後再試。</h3><br><br><br></div>
 @endempty
 @foreach($area as $resale)
 <div id="accordion">
@@ -56,7 +56,7 @@
 
 <!-- footer -->
 <hr>
-<div class=" text-white bg-dark p-4">
+<div class="text-white bg-dark p-4">
           <div class="row text-center col-12">
             <div class="col-sm-12 col-md-12 col-lg-12 col-12">
             <ul class="nav">

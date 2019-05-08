@@ -56,7 +56,7 @@
     </form>
     @endforeach
     @endforeach
-<div>
+</div>
 <!-- footer -->
 <hr>
 <div class=" text-white bg-dark p-4">

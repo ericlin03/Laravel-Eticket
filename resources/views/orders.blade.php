@@ -68,6 +68,7 @@
     <hr>
 </div>
 @endforeach
+</div>
 
 <!-- footer -->
 
