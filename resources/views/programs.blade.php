@@ -1,4 +1,4 @@
-@extends('layouts.app2')            
+@extends('layouts.app')
 @section('content')
 
 <div class="container mt-3">
@@ -19,8 +19,36 @@
 <div class="row text-center">
 @foreach($act as $program)
 <div class="col-md-4 pb-1 pb-md-0">
-    <div class="card">
-    <img class="card-img-top" src="{{$program->img }}"  height="180" alt="Card image cap">
+<div class="card h-100">
+    <img class="card-img-top" src="{{ $program->img }}"  height="180" alt="Card image cap" data-toggle="modal"  href="#7">
+    <div class="modal fade bd-example-modal-lg" id="7" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" id="7">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">{{"$program->prog_name"}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <img class="card-img-top" src="{{ $program->img }}"  height="400" alt="Card image cap">
+          <br>
+          <br>
+          <p>{{"$program->prog_content"}}</p>
+          <br>
+          <br>
+          <p>售票時間:{{"$program->prog_selldate"}}</p>
+          <p>票價分類:{{"$program->prog_price"}}</p>
+          <p>場地:{{"$program->site_name"}}</p>
+          <p>演出時間:{{"$program->prog_date"}}</p>
+          <img src="{{$program->imgprice }}"  height="500" alt="Card image cap">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="card-body">
 
         <h5 class="card-title">{{$program->prog_name}}</h5>
@@ -33,8 +61,6 @@
           <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
           <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
         </form>
-        <button class="btn btn-primary" style="border:0; background-color: transparent; float:right;" onclick="document.getElementById('ph1').src='images/success-cart.png'" ><img id="ph1" onclick="change()" src="images/star.png" width="35" height="35" class="d-inline-block align-top" alt="">
-        </button>
     </div>
     </div>
     <hr>
@@ -42,55 +68,4 @@
 @endforeach
 </div>
 </div>
-
-
-
-<!-- footer -->
-<hr>
-<div class=" text-white bg-dark p-4">
-          <div class="row text-center col-12">
-            <div class="col-sm-12 col-md-12 col-lg-12 col-12">
-            <ul class="nav">
-    <li class="nav-item col-2 col-md-2 col-lg-2">
-    </li>
-    <li class="nav-item col-2 col-md-2 col-lg-2">
-      <a class="nav-link" href="">購票流程說明</a>
-    </li>
-    <li class="nav-item col-2 col-md-2 col-lg-2">
-      <a class="nav-link" href="{{url('clause')}}">服務條款</a>
-    </li>
-    <li class="nav-item col-2 col-md-2 col-lg-2">
-      <a class="nav-link" href="#">隱私權政策</a>
-    </li>
-    <li class="nav-item col-2 col-md-2 col-lg-2">
-      <a class="nav-link" href="#">加入我們</a>
-    </li>
-    <li class="nav-item col-2 col-md-2 col-lg-2">
-    </li>
-  </ul>
-          </div>
-      </div>
-<br>
-      <div class="row text-center">
-        <div class="col-4 col-md-4 col-lg-4">
-          <a data-toggle="tooltip" data-placement="bottom" title="關於我們" target="_blank" href="#"><strong>ETicket票務平台</strong></a>
-        </div>
-        <div class="col-4 col-md-4 col-lg-4">
-          <span data-toggle="tooltip" data-placement="bottom" title="(Mon-Fri 9:30am–8:00pm Sat.11:00am-7:00pm)">客服專線: 02-22227777</span>
-        </div>
-        <div class="col-4 col-md-4 col-lg-4">
-            <a data-toggle="tooltip" data-placement="bottom" title="send now!" target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=ETicket@gmail.com">客服信箱: ETicket@gmail.com</a>
-        </div>
-        </div>
-    <br>
-    <footer class="text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <p>CopyrightcETicket Corporation. All Rights Reserved.</p>
-          </div>
-        </div>
-      </div>
-    </footer>  
-    </div>
 @endsection
