@@ -36,8 +36,8 @@ Route::get('/news',function(){
 
 Route::get('/order', 'HomeController@personalorder');
 
-Route::get('/index',function(){
-  return view('index');
+Route::get('/transferToOrganizer',function(){
+  return view('transferToOrganizer');
 });
 
 Route::get('/view',function(){
@@ -109,8 +109,31 @@ Route::get('buffer', 'mailController@passer');
 Route::redirect('buffer', 'home');
 //test
 
-Route::get('/test', function(){
-  return view('test');
+// backhome
+Route::get('/backhome', 'BackhomeController@index');
+Route::get('/programsmanager','BackhomeController@getData');
+Route::get('/delete/{prog_id}','BackhomeController@delete');
+//Route::get('edit/{progid}','BackhomeController@show');
+//Route::post('edit/{prog_id}','BackhomeController@edit');
+
+Route::post('/edit/update','BackhomeController@update'); 
+
+Route::get('/edit/{prog_id}','BackhomeController@edit'); 
+
+Route::get('/newprogram',function (){
+  return view('newprogram');
 });
 
-Route::get('test2', 'HomeController@test');
+
+
+// Route::get('/programsmanager',function (){
+//   return view('programsmanager');
+// });
+
+Route::post('insert','BackhomeController@insert');
+
+// Route::get('/test', function(){
+//   return view('test');
+// });
+
+// Route::get('test2', 'HomeController@test');

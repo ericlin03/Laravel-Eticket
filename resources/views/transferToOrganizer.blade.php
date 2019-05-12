@@ -1,3 +1,16 @@
+@extends('layouts.app3')
+@section('content')
+<div class="container mt-3">
+  <div class="col-12">
+    <h1><strong>轉帳給主辦方</strong></h1>
+  </div>
+</div>
+@endsection
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 
