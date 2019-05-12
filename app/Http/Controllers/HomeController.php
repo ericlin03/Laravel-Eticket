@@ -146,7 +146,8 @@ class HomeController extends Controller
         $user = Auth::user();
         $wallet = $user->wallet;
         $act = DB::select('select * from program');
-        return view('programs', compact('act'));
+        $card = DB::select('select * from program');
+        return view('programs', compact('act', 'card'));
     }
 
     public function buyOneTicket(Request $request) {

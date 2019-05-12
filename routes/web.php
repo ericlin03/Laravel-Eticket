@@ -86,6 +86,11 @@ Route::get('/buyTicket', 'HomeController@buyTicket');
 Route::get('/buyTicket', function () {
     return view('buyTicket');
 });
+
+Route::get('/withdraw', function () {
+  return view('withdraw');
+});
+
 // confirm ticket
 Route::get('/confirmTicket', 'HomeController@confirmTicket');
 // Route::get('/confirmTicket', function () {

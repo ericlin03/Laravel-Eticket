@@ -20,35 +20,7 @@
 @foreach($act as $program)
 <div class="col-md-4 pb-1 pb-md-0">
 <div class="card h-100">
-    <img class="card-img-top" src="{{ $program->img }}"  height="180" alt="Card image cap" data-toggle="modal"  href="#7">
-    <div class="modal fade bd-example-modal-lg" id="7" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" id="7">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">{{"$program->prog_name"}}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-          <img class="card-img-top" src="{{ $program->img }}"  height="400" alt="Card image cap">
-          <br>
-          <br>
-          <p>{{"$program->prog_content"}}</p>
-          <br>
-          <br>
-          <p>售票時間:{{"$program->prog_selldate"}}</p>
-          <p>票價分類:{{"$program->prog_price"}}</p>
-          <p>場地:{{"$program->site_name"}}</p>
-          <p>演出時間:{{"$program->prog_date"}}</p>
-          <img src="{{$program->imgprice }}"  height="500" alt="Card image cap">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <img class="card-img-top" src="{{ $program->img }}"  height="180" alt="Card image cap" data-toggle="modal"  href="#{{ $program->prog_id }}">
     <div class="card-body">
 
         <h5 class="card-title">{{$program->prog_name}}</h5>
@@ -65,6 +37,37 @@
     </div>
     <hr>
 </div>
+@endforeach
+
+@foreach($card as $data)
+    <div class="modal fade bd-example-modal-lg" id="" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" id="7">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">{{"$data->prog_name"}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <img class="card-img-top" src="{{ $data->img }}"  height="400" alt="Card image cap">
+          <br>
+          <br>
+          <p>{{"$data->prog_content"}}</p>
+          <br>
+          <br>
+          <p>售票時間:{{"$data->prog_selldate"}}</p>
+          <p>票價分類:{{"$data->prog_price"}}</p>
+          <p>場地:{{"$data->site_name"}}</p>
+          <p>演出時間:{{"$data->prog_date"}}</p>
+          <img src="{{$data->imgprice }}"  height="500" alt="Card image cap">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 @endforeach
 </div>
 </div>
