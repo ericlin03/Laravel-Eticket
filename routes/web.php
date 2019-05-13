@@ -124,13 +124,19 @@ Route::get('/newprogram',function (){
   return view('newprogram');
 });
 
+Route::post('insert','BackhomeController@insert');
+
+Route::get('/newpost',function (){
+  return view('newpost');
+});
+
+Route::post('/insertpost','BackhomeController@insertpost');
+
 
 
 // Route::get('/programsmanager',function (){
 //   return view('programsmanager');
 // });
-
-Route::post('insert','BackhomeController@insert');
 
 // Route::get('/test', function(){
 //   return view('test');

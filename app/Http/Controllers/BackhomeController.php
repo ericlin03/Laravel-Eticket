@@ -122,6 +122,20 @@ class BackhomeController extends Controller
         return redirect('backhome');
     }
 
+    public function insertpost(Request $req)
+    {
+        $title = $req->input('title');
+        $content = $req->input('content');
+        
+
+        $data = array(
+            'title' => $title, 'content' => $content,             
+        );
+
+        DB::table('post')->insert($data);
+        return Redirect::to('backhome');
+    }
+
 
 
     function edit($prog_id)
