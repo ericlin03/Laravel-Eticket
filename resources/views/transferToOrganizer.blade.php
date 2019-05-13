@@ -5,8 +5,25 @@
     <h1><strong>轉帳給主辦方</strong></h1>
   </div>
 </div>
-@endsection
 
+
+<div class="container mt-3">
+  <label id="viewDays">表演結束剩餘天數：</label>
+  <input type="text" id="days" placeholder="e.g. 95" />
+  <button class="btn btn-danger" onclick="App.setDays()">Set Days</button>
+  <br>
+  <br>
+  <label id="address">主辦方電子錢包位址：</label>
+  <input type="text" id="receiver" placeholder="address" />
+
+  <button class="btn btn-danger" onclick="App.setReceiver()">Set Receiver</button>
+  <br>
+  <button class="btn btn-outline-warning" onclick="App.sendToContract()">Transfer To contract</button>
+  <br>
+  <button class="btn btn-outline-warning" onclick="App.transferToOrganizer()">Transfer To Organizer</button>
+</div>
+@endsection
+{{-- 
 
 
 
@@ -56,4 +73,4 @@
   <script src="./dist/js/index.js"></script>
 </body>
 
-</html>
+</html> --}}

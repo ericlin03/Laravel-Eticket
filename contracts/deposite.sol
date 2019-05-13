@@ -8,13 +8,12 @@ contract Deposite {
         buyer = msg.sender;
     }
 
-    function deposite(uint _amount) public payable {
+    function deposite() public payable {
         require(buyer == platform, "非平台帳號");
-        require(msg.value == _amount, "ok");
     }
 
-    function withdraw(uint _amount) public payable {
-        require(buyer != platform, "平台帳號不能購買平台幣");
-        buyer.transfer(_amount);
+    function withdraw(uint _amount) public {
+        // require(buyer != platform, "平台帳號不能購買平台幣");
+        msg.sender.transfer(_amount * 1 ether);
     }
 }

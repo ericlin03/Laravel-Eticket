@@ -79,14 +79,13 @@ class BackhomeController extends Controller
         $prog_selldate = $request['prog_selldate'];
         $prog_organizer = $request['prog_organizer'];
         $site_name = $request['site_name'];
-        $img = $request['img'];
-        $imgprice = $request['imgprice'];
+        // $img = $request['img'];
+        // $imgprice = $request['imgprice'];
         $section = $request['section'];
 
         $data = array(
             'prog_name' => $prog_name, 'prog_content' => $prog_content, 'prog_price' => $prog_price, 'prog_date' => $prog_date,
-            'prog_selldate' => $prog_selldate, 'prog_organizer' => $prog_organizer, 'site_name' => $site_name, 'img' => $img, 'imgprice' => $imgprice,
-            'section' => $section
+            'prog_selldate' => $prog_selldate, 'prog_organizer' => $prog_organizer, 'site_name' => $site_name,'section' => $section
         );
 
         DB::table('program')->insert($data);

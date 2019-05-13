@@ -132,7 +132,9 @@ Route::get('/newpost',function (){
 
 Route::post('/insertpost','BackhomeController@insertpost');
 
-
+Route::get('/deposite', function() {
+  return view('deposite');
+});
 
 // Route::get('/programsmanager',function (){
 //   return view('programsmanager');

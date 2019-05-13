@@ -124,7 +124,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="img" class="col-md-4 col-form-label text-md-right">{{ __('宣傳圖上傳') }}</label>
 
                             <div class="col-md-6">
@@ -155,7 +155,7 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row">
                             <label for="section" class="col-md-4 col-form-label text-md-right">{{ __('區域') }}</label>
@@ -172,12 +172,6 @@
                                 @endif
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="section" class="col-md-4 col-form-label text-md-right">轉帳剩餘天數</label>
-                            <input type="text" id="days" placeholder="e.g. 95" />
-                            <button onclick="App.setDays()">Set Days</button>
-                        </div>-
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

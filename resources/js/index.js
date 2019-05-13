@@ -31,31 +31,36 @@ const App = {
             const deployedEticket = eticketArtifact.networks[networkId];
             this.eticket = new web3.eth.Contract(
                 eticketArtifact.abi,
-                deployedEticket.address
+                deployedEticket.address,
+                { defaultGasPrice:'00000000000' }
             );
 
             const deployResale = resaleArtifact.networks[networkId];
             this.resale = new web3.eth.Contract(
                 resaleArtifact.abi,
-                deployResale.address
+                deployResale.address,
+                { defaultGasPrice:'00000000000' }
             );
 
             const deployBuyTicket = buyTicketArtifact.networks[networkId];
             this.buyTicket = new web3.eth.Contract(
                 buyTicketArtifact.abi,
-                deployBuyTicket.address
+                deployBuyTicket.address,
+                { defaultGasPrice:'00000000000' }
             );
 
             const deployBuyTickets = buyTicketsArtifact.networks[networkId];
             this.buyTickets = new web3.eth.Contract(
                 buyTicketsArtifact.abi,
-                deployBuyTickets.address
+                deployBuyTickets.address,
+                { defaultGasPrice:'00000000000' }
             );
 
             const deployDeposite = DepositeArtifact.networks[networkId];
             this.deposite = new web3.eth.Contract(
                 DepositeArtifact.abi,
-                deployDeposite.address
+                deployDeposite.address,
+                { defaultGasPrice:'00000000000' }
             );
 
             // get accounts
@@ -71,6 +76,7 @@ const App = {
             });
             this.viewBalance();
             this.allBlock();
+            this.total();
 
             // web3.eth.getBalance(this.account, (err, balance) => {
             //   if (err) return;
@@ -442,14 +448,67 @@ const App = {
         }
     },
 
-    withdraw: async function() {
+    withdrawCoin: async function() {
         try {
             const { withdraw } = this.deposite.methods;
             var wallet = $("#wallet").val();
-            platformCoin = platformCoin.toString();
+            var rate = $("#amount").val();
+            platformCoin = parseInt(rate);
+            // console.log(platformCoin);
             if (wallet == this.account) {
-              await withdraw(platformCoin).send({ from: this.account });
+              await withdraw(platformCoin / 20).send({ from: this.account });
             }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    // withdraw: async function() {
+    //     try {
+    //         const { web3 } = this;
+    //         var wallet = $("#wallet").val();
+    //         wallet = wallet.toString();
+    //         var amount = $("#amount").val();
+    //         amount = amount.toString();
+    //         await web3.eth.sendTransaction({ 
+    //             from: '0x724091f781a3b0690E35f5Ac7e9601cfeE25c0eD', 
+    //             to: wallet, 
+    //             value: web3.utils.toWei(amount, 'ether') 
+    //         }, '123456', function(){console.log('It works!!!')});
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // },
+
+    depositeCoin: async function() {
+        try {
+            const { web3 } = this;
+            const { deposite } = this.deposite.methods;
+            var amount = $("#deposite").val();
+            platformCoin = amount.toString();
+            await deposite().send({ 
+                from: this.account, 
+                value: web3.utils.toWei(platformCoin, "ether"),
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    
+    total: async function() {
+        try {
+            const { web3 } = this;
+            var total;
+            web3.eth.getBalance('0x5cD9D499CEA526461150251f0c6687D315f76D6F',
+            'latest',
+            function(err, result) {
+                if (!err) {
+                    total = result;
+                    total.toString();
+                    total = web3.utils.fromWei(total, 'ether');
+                    $("#total").html(total);
+                }
+            });
         } catch (error) {
             console.log(error);
         }

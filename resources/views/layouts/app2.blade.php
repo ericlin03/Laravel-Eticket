@@ -66,7 +66,7 @@
               <a class="nav-link ecolor bcr" href="/problem">　常見問題　</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link ecolor" href="/withdraw"> 儲值平台幣 </a>
+              <a class="nav-link ecolor" href="/withdraw">　儲值平台幣　</a>
             </li>
           </ul>
 

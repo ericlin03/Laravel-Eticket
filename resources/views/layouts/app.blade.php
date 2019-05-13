@@ -65,9 +65,6 @@
             <li class="nav-item active white">
               <a class="nav-link ecolor bcr" href="{{ url('problem') }}">　常見問題　</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link ecolor" href="/withdraw"> 儲值平台幣 </a>
-            </li>
           </ul>
 
           <!-- Right Side Of Navbar -->
@@ -110,9 +107,9 @@
 
     <main class="py-4">
       @yield('content')
-      <!-- footer -->
-    </main>
-    <hr>
+  </div>
+  </main>
+  <hr>
   </div>
 </body>
 <footer class="text-center" style="right: 0;bottom: 0;left: 0;">
