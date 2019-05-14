@@ -54,9 +54,9 @@
       <br>
       <table class="table table-striped">
         <tr class="table-warning">
-          @foreach($area as $area)
+          @foreach($area as $areas)
           <td>總金額：</td>
-          <td id="amount">{{ $area->tick_price }}</td>
+          <td id="amount">{{ $areas->tick_price }}</td>
         </tr>
         <tr class="table-danger">
           <td>付款錢包地址：</td>

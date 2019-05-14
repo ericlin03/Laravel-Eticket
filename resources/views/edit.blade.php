@@ -87,27 +87,6 @@
 
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="img" class="col-md-4 col-form-label text-md-right">{{ __('宣傳圖上傳') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="img" type="text" name="img" value="{{$act->img}}" required>
-
-
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="imgprice"
-                                class="col-md-4 col-form-label text-md-right">{{ __('座位和票價圖上傳') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="imgprice" type="text" name="imgprice" value="{{$act->imgprice}}" required>
-
-
-                            </div>
-                        </div>
                         @endforeach
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

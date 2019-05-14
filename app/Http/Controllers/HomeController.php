@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use Redirect;
 
 
 class HomeController extends Controller
@@ -157,6 +158,13 @@ class HomeController extends Controller
         $progName = $request->input('prog_name');
         $act = DB::select('select * from program where prog_name=?',[$progName]);
         $section = DB::select('SELECT section FROM program WHERE prog_name=?',[$progName]);
+        $check = DB::select('SELECT owner_id FROM program_seat WHERE prog_name=?', [$progName]);
+        foreach($check as $checkStatus) {
+            if ($checkStatus->owner_id == $user->wallet) {
+                echo '<script>alert(\'您已擁有此票卷\');</script>';
+                return redirect()->back("重新導回網頁");
+            }
+        }
         // $var = is_string($section) ? 'Yes' : 'No';
         $section = (array)$section[0];
         $section = json_encode($section);

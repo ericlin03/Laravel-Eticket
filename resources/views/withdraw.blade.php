@@ -10,6 +10,8 @@
 
 <div class="container">
     <br>
+    <h4>目前還有 <font id="total" style="color:red">?</font> 平台幣</h4>
+    <br>
     <h3 style="color:red">注意！平台幣：新台幣＝1：20</h3>
     <br>
     <table class="table table-striped">
