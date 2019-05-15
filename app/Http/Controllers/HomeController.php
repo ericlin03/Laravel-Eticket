@@ -162,7 +162,7 @@ class HomeController extends Controller
         foreach($check as $checkStatus) {
             if ($checkStatus->owner_id == $user->wallet) {
                 echo '<script>alert(\'您已擁有此票卷\');</script>';
-                return redirect()->back("重新導回網頁");
+                return redirect()->back();
             }
         }
         // $var = is_string($section) ? 'Yes' : 'No';
@@ -307,32 +307,58 @@ class HomeController extends Controller
         </script>");
     }
 
-    public function buyingTicket()
-    {
-        $this->middleware('auth');
-        // $user = Auth::user();
-        // $email = $user->email;
-        $emailQuery = DB::table('users') -> select('email') -> where('identity', '=', 'A789456123') -> get();
-        $email = $emailQuery[0]->email;
-        return view('buyingTicket')->with('email', $email);
-    }
+    // public function buyingTicket()
+    // {
+    //     $this->middleware('auth');
+    //     // $user = Auth::user();
+    //     // $email = $user->email;
+    //     $emailQuery = DB::table('users') -> select('email') -> where('identity', '=', 'A789456123') -> get();
+    //     $email = $emailQuery[0]->email;
+    //     return view('buyingTicket')->with('email', $email);
+    // }
+
     //confirm Ticket
     public function confirmTicket()
     {
         $this->middleware('auth');
         $user = Auth::user();
         $wallet = $user->wallet;
-        return view('confirmTicket')->with('wallet', $wallet);
+        $programQuery = DB::table('users')->select('program')->get();
+        $program = $programQuery[0]->program;
+        $seats = DB::select('select * from program_seat where owner_id=:owner_id and prog_name=:prog_name', ['owner_id' => '', 'prog_name' => '輔大音樂會']);
+        $price = DB::select('select tick_price from program_seat where prog_name = ?', [$program]);
+        foreach ($price as $amount) {
+            if ($amount->tick_price != 0) {
+                $price = $amount->tick_price;
+                $price = intval($price);
+            }
+        }
+        return view('confirmTicket', compact('wallet', 'program', 'seats', 'price'));
     }
 
-    //test
-
-    public function test(Request $request) {
+    //buyticket
+    public function buyTicket()
+    {
         $this->middleware('auth');
         $user = Auth::user();
         $wallet = $user->wallet;
-        $id = $request->input('id');
-        $data = DB::select('select * from users where id=?', [$id]);
-        return view('/test2', compact('data'));
+        $walletFromDB = DB::select('SELECT owner_id FROM program_seat WHERE owner_id!="" AND prog_name=:prog_name', ['prog_name' => "輔大音樂會"]);
+        foreach ($walletFromDB as $wal) {
+            if ($wal->owner_id == $wallet) {
+                echo "<script type=\"text/javascript\">alert(\"您已有此表演的票了\");</script>";
+                return redirect('home');
+            }
+        }
+        return view('/buyTicket', compact('wallet'));
+    }
+
+    public function getTicket()
+    {
+        $user = Auth::user();
+        $wallet = $user->wallet;
+        $seat = $_POST['tick_seat'];
+        $prog = $_POST['program'];
+        DB::table('program_seat')->where('prog_name', $prog)->where('tick_seat', $seat)->update(['owner_id' => $wallet, 'status' => 'sold']);
+        return view('home');
     }
 }

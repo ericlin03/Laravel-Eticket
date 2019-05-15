@@ -81,11 +81,10 @@ Route::get('resaleProcess', 'HomeController@resaleProcess');
 
 Route::post('resaleUpdate', 'HomeController@resaleUpdate');
 
+
 Route::get('/buyTicket', 'HomeController@buyTicket');
 
-Route::get('/buyTicket', function () {
-    return view('buyTicket');
-});
+Route::post('getTicket', 'HomeController@getTicket');
 
 Route::get('/withdraw', function () {
   return view('withdraw');

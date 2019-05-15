@@ -31,36 +31,31 @@ const App = {
             const deployedEticket = eticketArtifact.networks[networkId];
             this.eticket = new web3.eth.Contract(
                 eticketArtifact.abi,
-                deployedEticket.address,
-                { defaultGasPrice:'00000000000' }
+                deployedEticket.address
             );
 
             const deployResale = resaleArtifact.networks[networkId];
             this.resale = new web3.eth.Contract(
                 resaleArtifact.abi,
-                deployResale.address,
-                { defaultGasPrice:'00000000000' }
+                deployResale.address
             );
 
             const deployBuyTicket = buyTicketArtifact.networks[networkId];
             this.buyTicket = new web3.eth.Contract(
                 buyTicketArtifact.abi,
-                deployBuyTicket.address,
-                { defaultGasPrice:'00000000000' }
+                deployBuyTicket.address
             );
 
             const deployBuyTickets = buyTicketsArtifact.networks[networkId];
             this.buyTickets = new web3.eth.Contract(
                 buyTicketsArtifact.abi,
-                deployBuyTickets.address,
-                { defaultGasPrice:'00000000000' }
+                deployBuyTickets.address
             );
 
             const deployDeposite = DepositeArtifact.networks[networkId];
             this.deposite = new web3.eth.Contract(
                 DepositeArtifact.abi,
-                deployDeposite.address,
-                { defaultGasPrice:'00000000000' }
+                deployDeposite.address
             );
 
             // get accounts
@@ -101,11 +96,33 @@ const App = {
 
     // Contract BuyTickets
     setBuyer: async function() {
+        let address = [];
+        let email = [];
+        let bool = [];
         try {
             const { setBuyer } = this.buyTickets.methods;
-            let receiver = $("#rec").val();
-            await console.log(receiver);
-            await setBuyer(receiver, "email", false).send({
+            if ($("#receiver1").val() != "") {
+                console.log($("#receiver1").val());
+                address.push($("#receiver1").val());
+                email.push("");
+                bool.push(false);
+            }
+            if ($("#receiver2").val() != "") {
+                address.push($("#receiver2").val());
+                email.push("");
+                bool.push(false);
+            }
+            if ($("#receiver3").val() != "") {
+                address.push($("#receiver3").val());
+                email.push("");
+                bool.push(false);
+            }
+            if ($("#receiver4").val() != "") {
+                address.push($("#receiver4").val());
+                email.push("");
+                bool.push(false);
+            }
+            await setBuyer(address, email, bool).send({
                 from: this.account
             });
             // $("#status").html(await getBuyers().call());
@@ -127,7 +144,7 @@ const App = {
                 setTimeout(function() {
                     window.location.href = "http://localhost:8000/home";
                 }, 200);
-                await confirm().send({
+                await confirm(amount).send({
                     from: wallet,
                     value: web3.utils.toWei(amount, "ether")
                 });
@@ -499,7 +516,7 @@ const App = {
         try {
             const { web3 } = this;
             var total;
-            web3.eth.getBalance('0x5cD9D499CEA526461150251f0c6687D315f76D6F',
+            web3.eth.getBalance('0xa6F5226C98668E944a0DD1551da9ac0BB2E4bB3B',
             'latest',
             function(err, result) {
                 if (!err) {

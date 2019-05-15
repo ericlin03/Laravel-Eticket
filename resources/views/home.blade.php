@@ -165,11 +165,9 @@
 
                 <br>
                 <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
-                <form method="get" action="buyOneTicket">
+                <form method="get" action="buyTicket">
                   <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
-                  <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'"
-                    class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25"
-                      class="d-inline-block align-top" alt=""></button>
+                  <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
                 </form>
               </div>
             </div>

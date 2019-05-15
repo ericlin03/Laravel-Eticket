@@ -1,4 +1,5 @@
 pragma solidity >=0.4.21 <0.6.0;
+pragma experimental ABIEncoderV2;
 
 contract BuyTickets{
   address payable public owner = 0x4190C332e7D40bF2E7A370Bbc836F5b8832CB326;
@@ -8,7 +9,7 @@ contract BuyTickets{
   uint public countConfirms = 0; //auto pay when all buyers confirm
   constructor() public{
     /* owner = msg.sender; */
-    price = 1 ether;
+    // price = 1 ether;
   }
 
   struct Buyer {
@@ -21,43 +22,32 @@ contract BuyTickets{
 
   // event buyerRegistered(address email);
 
-  function setBuyer(address _address, string memory _email, bool _status) public {
-    require(buyers < 4);
-    require(buyerAccounts.length <= 4);
-    require(checkDuplicate(_address) == true);
-    /* var buyer = theBuyer[_address]; */
-
-    theBuyer[_address].email = _email;
-    theBuyer[_address].status = _status;
-    buyerAccounts.push(_address) -1;
-    buyers++;
+  function setBuyer(address[] memory arr, string[] memory email, bool[] memory status) public {
+    for(uint i = 0; i < arr.length ; i++){
+      theBuyer[arr[i]].email = email[i];
+      theBuyer[arr[i]].status = status[i];
+      buyerAccounts.push(arr[i]) - 1;
+    }
     // emit buyerRegistered(buyer.email);
   }
-  //get all the buyers
-  /* function getBuyers() view public returns(address[]){
-    return buyerAccounts;
-  } */
-  //get specific buyer;
-  /* function getBuyer(address _address) view public returns(string, bool){
-    return (theBuyer[_address].email, theBuyer[_address].status);
-  } */
 
   //confirm(): change status to true, and put in ether
-  function confirm() public payable{
+  function confirm(uint _amount) public payable{
     /* require() */
-    require(msg.value == price); //making sure they are paying the right amount
+    // require(msg.value == price); //making sure they are paying the right amount
     require(includes(buyerAccounts, msg.sender)); //making sure the account calling confirm is in the array
     theBuyer[msg.sender].status = true; //set buyer status to true
     balance[msg.sender] += msg.value; //remember how many a buyer paid
     countConfirms++;
     if(countConfirms == buyerAccounts.length){ //if all the buyers had confirm, pay automatically
-      buyTickets();
+      buyTickets(_amount);
+
     }
   }
 
   // cancel
   function cancel() public payable{
-    require(theBuyer[msg.sender].status == true); //make sure the buyer calling cancel was true
+    // require(theBuyer[msg.sender].status == true); //make sure the buyer calling cancel was true
     theBuyer[msg.sender].status = false; //change buyer status to false
     countConfirms--;
     balance[msg.sender] -= price;
@@ -65,9 +55,9 @@ contract BuyTickets{
   }
 
   //buyTickets(): transfer ether to owner
-  function buyTickets() public payable{
+  function buyTickets(uint _amount) public payable{
     require(checkIfTrue());
-    owner.transfer(price*buyerAccounts.length); //transfer ether to the contract owner
+    owner.transfer(1 ether * _amount); //transfer ether to the contract owner
   }
 
 
@@ -75,7 +65,7 @@ contract BuyTickets{
   //to make sure the account calling confirm() is in the array
   function includes(address[] memory arr, address find) public pure returns(bool){
     uint count = 0;
-    for(uint i =0; i< arr.length; i++){
+    for(uint i = 0; i < arr.length; i++){
       if(arr[i] == find){
         count++;
       }
