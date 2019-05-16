@@ -28,6 +28,7 @@ contract BuyTickets{
       theBuyer[arr[i]].status = status[i];
       buyerAccounts.push(arr[i]) - 1;
     }
+    buyers = arr.length;
     // emit buyerRegistered(buyer.email);
   }
 
@@ -40,7 +41,7 @@ contract BuyTickets{
     balance[msg.sender] += msg.value; //remember how many a buyer paid
     countConfirms++;
     if(countConfirms == buyerAccounts.length){ //if all the buyers had confirm, pay automatically
-      buyTickets(_amount);
+      buyTickets(buyers * _amount);
 
     }
   }

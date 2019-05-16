@@ -24,8 +24,19 @@
     <label for="receiver">電子錢包</label>
     <input id="receiver4" name="receiver4" type="text" placeholder="電子錢包" />
 
-    <button class="btn btn-outline-danger" onclick="App.setBuyer()">go buy ticket</button>
+    <button class="btn btn-outline-danger" onclick="App.setBuyer()" id="goBuyTicket">go buy ticket</button>
   </form>
   <a href="./confirmTicket">confirm</a>
 </div>
+
+{{-- <script>
+  $(document).ready(function(){
+    if($("#receiver1").val() == $("#receiver2").val()){
+      
+    }
+  // if ($("#receiver1").val() != "" || $("#receiver1").val()!= $("#receiver2").val() || $("#receiver1").val()!= $("#receiver3").val() || $("#receiver1").val()!= $("#receiver4").val() || $("#receiver2").val() != "" || $("#receiver2").val()!= $("#receiver1").val() || $("#receiver2").val()!= $("#receiver3").val() || $("#receiver2").val()!= $("#receiver4").val() || $("#receiver3").val() != "" || $("#receiver3").val()!= $("#receiver1").val() || $("#receiver3").val()!= $("#receiver2").val() || $("#receiver3").val()!= $("#receiver4").val() || $("#receiver4").val() != "" || $("#receiver4").val()!= $("#receiver1").val() || $("#receiver4").val()!= $("#receiver2").val() || $("#receiver4").val()!= $("#receiver3").val()){
+  //   $("#goBuyTicket").hide();
+  // }
+});
+</srcipt> --}}
 @endsection
