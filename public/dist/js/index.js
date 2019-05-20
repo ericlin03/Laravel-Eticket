@@ -67954,15 +67954,25 @@ var App = {
             case 4:
               networkId = _context.sent;
               deployedEticket = _build_contracts_Eticket_json__WEBPACK_IMPORTED_MODULE_2__.networks[networkId];
-              this.eticket = new web3.eth.Contract(_build_contracts_Eticket_json__WEBPACK_IMPORTED_MODULE_2__.abi, deployedEticket.address);
+              this.eticket = new web3.eth.Contract(_build_contracts_Eticket_json__WEBPACK_IMPORTED_MODULE_2__.abi, deployedEticket.address, {
+                defaultGasPrice: "0000000"
+              });
               deployResale = _build_contracts_Resale_json__WEBPACK_IMPORTED_MODULE_3__.networks[networkId];
-              this.resale = new web3.eth.Contract(_build_contracts_Resale_json__WEBPACK_IMPORTED_MODULE_3__.abi, deployResale.address);
+              this.resale = new web3.eth.Contract(_build_contracts_Resale_json__WEBPACK_IMPORTED_MODULE_3__.abi, deployResale.address, {
+                defaultGasPrice: "0000000"
+              });
               deployBuyTicket = _build_contracts_BuyTicket_json__WEBPACK_IMPORTED_MODULE_4__.networks[networkId];
-              this.buyTicket = new web3.eth.Contract(_build_contracts_BuyTicket_json__WEBPACK_IMPORTED_MODULE_4__.abi, deployBuyTicket.address);
+              this.buyTicket = new web3.eth.Contract(_build_contracts_BuyTicket_json__WEBPACK_IMPORTED_MODULE_4__.abi, deployBuyTicket.address, {
+                defaultGasPrice: "0000000"
+              });
               deployBuyTickets = _build_contracts_BuyTickets_json__WEBPACK_IMPORTED_MODULE_5__.networks[networkId];
-              this.buyTickets = new web3.eth.Contract(_build_contracts_BuyTickets_json__WEBPACK_IMPORTED_MODULE_5__.abi, deployBuyTickets.address);
+              this.buyTickets = new web3.eth.Contract(_build_contracts_BuyTickets_json__WEBPACK_IMPORTED_MODULE_5__.abi, deployBuyTickets.address, {
+                defaultGasPrice: "0000000"
+              });
               deployDeposite = _build_contracts_Deposite_json__WEBPACK_IMPORTED_MODULE_6__.networks[networkId];
-              this.deposite = new web3.eth.Contract(_build_contracts_Deposite_json__WEBPACK_IMPORTED_MODULE_6__.abi, deployDeposite.address); // get accounts
+              this.deposite = new web3.eth.Contract(_build_contracts_Deposite_json__WEBPACK_IMPORTED_MODULE_6__.abi, deployDeposite.address, {
+                defaultGasPrice: "0000000"
+              }); // get accounts
 
               _context.next = 17;
               return web3.eth.getAccounts();

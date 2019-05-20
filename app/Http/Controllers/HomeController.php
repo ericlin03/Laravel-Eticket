@@ -33,12 +33,12 @@ class HomeController extends Controller
     public function index()
     {
         $this->middleware('auth');
-        $data = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
+        $data = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>12]);
         $data2 = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>2]);
         $data3 = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>3]);
         $data4 = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>4]);
         $data5 = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>5]);
-        $data6 = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>6]);
+        $data6 = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
         $data7 = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>7]);
         $data8 = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
         $post2 = DB::select('select * from post');
@@ -54,6 +54,12 @@ class HomeController extends Controller
         return view('activity8',compact('act','area'));
 
 
+    }
+
+    public function post(){
+        $this->middleware('auth');
+        $post = DB::select('select * from post');
+        return view('news', compact('post'));
     }
 
     // public function pay2(){
@@ -147,8 +153,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $wallet = $user->wallet;
         $act = DB::select('select * from program');
-        $card = DB::select('select * from program');
-        return view('programs', compact('act', 'card'));
+        return view('programs', compact('act'));
     }
 
     public function buyOneTicket(Request $request) {

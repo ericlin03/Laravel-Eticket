@@ -126,11 +126,11 @@
           @foreach($data as $program)
           <div class="col-md-4 pb-1 pb-md-0">
             <div class="card h-100">
-              <img class="card-img-top" src="{{$program->img }}" height="180" alt="Card image cap" data-toggle="modal"
-                data-target=".bd-example-modal-lg">
-              <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+              <img class="card-img-top" src="{{ $program->img }}" height="180" alt="Card image cap" data-toggle="modal"
+                href="#13">
+              <div class="modal fade bd-example-modal-lg" id="13" tabindex="-1" role="dialog"
                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog modal-lg" id="13">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLongTitle">{{"$program->prog_name"}}</h5>
@@ -165,9 +165,11 @@
 
                 <br>
                 <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
-                <form method="get" action="buyTicket">
+                <form method="get" action="buyOneTicket">
                   <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
-                  <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'" class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25" class="d-inline-block align-top" alt=""></button>
+                  <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'"
+                    class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25"
+                      class="d-inline-block align-top" alt=""></button>
                 </form>
               </div>
             </div>
@@ -420,7 +422,7 @@
                 <p class="card-text">場地:{{"$program->site_name"}}</p>
                 <br>
                 <img src="images/.png" width="35" height="35" class="d-inline-block align-top" alt="">
-                <form method="get" action="buyOneTicket">
+                <form method="get" action="buyTicket">
                   <input type="text" name="prog_name" value="{{$program->prog_name}}" style="display:none" />
                   <button type="submit" style="float:center" onclick="location.href='{{ url('login') }}'"
                     class="btn btn-secondary">立即購票 <img src="images/ticket.png" width="25" height="25"

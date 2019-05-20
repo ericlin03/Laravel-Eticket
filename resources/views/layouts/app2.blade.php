@@ -74,10 +74,14 @@
           <ul class="navbar-nav ml-auto">
 
             <!-- Authentication Links -->
+            @if(Auth::check())
             @if (Auth::user()->permission == 'manager')
             @php
-              echo "<script>location.href='backhome';</script>";
+            echo "<script>
+              location.href='backhome';
+            </script>";
             @endphp
+            @endif
             @endif
             @guest
             <li class="nav-item">

@@ -127,66 +127,65 @@
                         {{-- <div class="form-group row">
                             <label for="img" class="col-md-4 col-form-label text-md-right">{{ __('宣傳圖上傳') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="img" type="text"
-                                    class="form-control{{ $errors->has('img') ? ' is-invalid' : '' }}" name="img"
-                                    value="{{ old('img') }}" required>
+                        <div class="col-md-6">
+                            <input id="img" type="text"
+                                class="form-control{{ $errors->has('img') ? ' is-invalid' : '' }}" name="img"
+                                value="{{ old('img') }}" required>
 
-                                @if ($errors->has('img'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('img') }}</strong>
-                                </span>
-                                @endif
-                            </div>
+                            @if ($errors->has('img'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('img') }}</strong>
+                            </span>
+                            @endif
                         </div>
-
-                        <div class="form-group row">
-                            <label for="imgprice"
-                                class="col-md-4 col-form-label text-md-right">{{ __('座位和票價圖上傳') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="imgprice" type="text"
-                                    class="form-control{{ $errors->has('imgprice') ? ' is-invalid' : '' }}"
-                                    name="imgprice" value="{{ old('imgprice') }}" required>
-
-                                @if ($errors->has('imgprice'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('imgprice') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div> --}}
-
-                        <div class="form-group row">
-                            <label for="section" class="col-md-4 col-form-label text-md-right">{{ __('區域') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="section" type="text"
-                                    class="form-control{{ $errors->has('section') ? ' is-invalid' : '' }}"
-                                    name="section" value="{{ old('section') }}" required>
-
-                                @if ($errors->has('section'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('section') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('新增') }}
-                                </button>
-
-
-                            </div>
-                        </div>
-                    </form>
                 </div>
+
+                <div class="form-group row">
+                    <label for="imgprice" class="col-md-4 col-form-label text-md-right">{{ __('座位和票價圖上傳') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="imgprice" type="text"
+                            class="form-control{{ $errors->has('imgprice') ? ' is-invalid' : '' }}" name="imgprice"
+                            value="{{ old('imgprice') }}" required>
+
+                        @if ($errors->has('imgprice'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('imgprice') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div> --}}
+
+                <div class="form-group row">
+                    <label for="section" class="col-md-4 col-form-label text-md-right">{{ __('區域') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="section" type="text"
+                            class="form-control{{ $errors->has('section') ? ' is-invalid' : '' }}" name="section"
+                            value="{{ old('section') }}" required>
+
+                        @if ($errors->has('section'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('section') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('新增') }}
+                        </button>
+
+
+                    </div>
+                </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 

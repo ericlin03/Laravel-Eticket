@@ -30,9 +30,7 @@ Route::get('/problem',function(){
 Route::get('/clause',function(){
   return view('clause');
 });
-Route::get('/news',function(){
-  return view('news');
-});
+Route::get('/news', 'HomeController@post');
 
 Route::get('/order', 'HomeController@personalorder');
 
@@ -144,3 +142,7 @@ Route::get('/deposite', function() {
 // });
 
 // Route::get('test2', 'HomeController@test');
+
+// Route::get('image-upload', 'ImageUploadController@imageUpload')->name('image.upload');
+
+// Route::post('image-upload', 'ImageUploadController@imageUploadPost')->name('image.upload.post');

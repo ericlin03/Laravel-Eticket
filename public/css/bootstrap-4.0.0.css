@@ -1832,6 +1832,23 @@ pre code {
   background-color: #c6c8ca;
 }
 
+/*第一欄第一列：左上*/
+tr:first-child td:first-child{
+  border-top-left-radius: 15px;
+}
+/*第一欄最後列：左下*/
+tr:last-child td:first-child{
+  border-bottom-left-radius: 15px;
+}
+/*最後欄第一列：右上*/
+tr:first-child td:last-child{
+  border-top-right-radius: 15px;
+}
+/*最後欄第一列：右下*/
+tr:last-child td:last-child{
+  border-bottom-right-radius: 15px;
+}
+
 .table-hover .table-dark:hover {
   background-color: #b9bbbe;
 }

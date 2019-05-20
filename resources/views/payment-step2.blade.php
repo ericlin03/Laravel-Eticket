@@ -53,8 +53,16 @@
     <div id="menu1" class="container tab-pane active">
       <br>
       <table class="table table-striped">
+        @foreach($area as $areas)
+        <tr class="table-primary">
+          <td>區域：</td>
+          <td id="section">{{ $areas->section }}</td>
+        </tr>
+        <tr class="table-success">
+          <td>座位：</td>
+          <td id="seat">{{ $areas->tick_seat }}</td>
+        </tr>
         <tr class="table-warning">
-          @foreach($area as $areas)
           <td>總金額：</td>
           <td id="amount">{{ $areas->tick_price }}</td>
         </tr>

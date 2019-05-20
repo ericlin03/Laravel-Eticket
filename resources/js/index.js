@@ -31,31 +31,36 @@ const App = {
             const deployedEticket = eticketArtifact.networks[networkId];
             this.eticket = new web3.eth.Contract(
                 eticketArtifact.abi,
-                deployedEticket.address
+                deployedEticket.address,
+                { defaultGasPrice: "0000000" }
             );
 
             const deployResale = resaleArtifact.networks[networkId];
             this.resale = new web3.eth.Contract(
                 resaleArtifact.abi,
-                deployResale.address
+                deployResale.address,
+                { defaultGasPrice: "0000000" }
             );
 
             const deployBuyTicket = buyTicketArtifact.networks[networkId];
             this.buyTicket = new web3.eth.Contract(
                 buyTicketArtifact.abi,
-                deployBuyTicket.address
+                deployBuyTicket.address,
+                { defaultGasPrice: "0000000" }
             );
 
             const deployBuyTickets = buyTicketsArtifact.networks[networkId];
             this.buyTickets = new web3.eth.Contract(
                 buyTicketsArtifact.abi,
-                deployBuyTickets.address
+                deployBuyTickets.address,
+                { defaultGasPrice: "0000000" }
             );
 
             const deployDeposite = DepositeArtifact.networks[networkId];
             this.deposite = new web3.eth.Contract(
                 DepositeArtifact.abi,
-                deployDeposite.address
+                deployDeposite.address,
+                { defaultGasPrice: "0000000" }
             );
 
             // get accounts

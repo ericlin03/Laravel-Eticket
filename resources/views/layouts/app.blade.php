@@ -65,13 +65,49 @@
             <li class="nav-item active white">
               <a class="nav-link ecolor bcr" href="{{ url('problem') }}">　常見問題　</a>
             </li>
+            @if($user = Auth::user())
+            <li class="nav-item active white">
+              <a class="nav-link ecolor bcr" href="{{ url('withdraw') }}">　儲值平台幣　</a>
+            </li>
+            @else
+            @endif
           </ul>
 
           <!-- Right Side Of Navbar -->
           <ul class="navbar-nav ml-auto">
 
             <!-- Authentication Links -->
-            @if(Auth::check())
+            {{-- @if($user = Auth::user())
+            <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }} <span class="caret"></span>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                      document.getElementById('logout-form').submit();">
+                {{ __('登出') }}
+              </a>
+              <a class="dropdown-item" href="/orders">個人訂單 <span class="sr-only">(current)</span></a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+              </form>
+            </div>
+
+            </li>
+            @else --}}
+
+            @guest
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('login') }}">{{ __('登入') }}</a>
+            </li>
+            @if (Route::has('register'))
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('register') }}">{{ __('註冊') }}</a>
+            </li>
+            @endif
+            @else
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false" v-pre>
@@ -80,7 +116,7 @@
 
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                       document.getElementById('logout-form').submit();">
                   {{ __('登出') }}
                 </a>
                 <a class="dropdown-item" href="/orders">個人訂單 <span class="sr-only">(current)</span></a>
@@ -90,16 +126,8 @@
               </div>
 
             </li>
-            @else
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('login') }}">{{ __('登入') }}</a>
-            </li>
-            @if (Route::has('register'))
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('register') }}">{{ __('註冊') }}</a>
-            </li>
-            @endif
-            @endif
+            @endguest
+
           </ul>
         </div>
       </div>
@@ -165,7 +193,6 @@
 <script src="js/jquery-3.2.1.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/popper.min.js"></script>
-<script src="js/bootstrap-4.0.0.js"></script>
 <script src="js/main.js"></script>
 <script src="./dist/js/index.js"></script>
 

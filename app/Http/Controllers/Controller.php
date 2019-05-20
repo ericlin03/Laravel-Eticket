@@ -13,7 +13,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function welcome(){
-        $data = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
+        $data = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>12]);
         $data2 = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>2]);
         $data3 = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>3]);
         $data4 = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>4]);
