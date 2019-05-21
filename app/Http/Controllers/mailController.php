@@ -85,7 +85,7 @@ class mailController extends Controller
             }
         }
         
-        return $this->mailer($this->email1, $this->email2, $this->email3, $this->email4);
+        return $this->mailer();
         // $this->walletFromBlade2 = $_POST['receiver2'];
         // $this->walletFromBlade3 = $_POST['receiver3'];
         // $this->walletFromBlade4 = $_POST['receiver4'];
@@ -126,10 +126,21 @@ class mailController extends Controller
             ['name' => 'Eric'],
             function ($message) {
                 // if ($walletFromBlade == $walletFromDB) {
-                $message->to($this->email1)->subject('Eticket 購票確認信');
-                $message->to($this->email2)->subject('Eticket 購票確認信');
-                $message->to($this->email3)->subject('Eticket 購票確認信');
-                $message->to($this->email4)->subject('Eticket 購票確認信');
+                if ($this->email1 != ''){
+                    $message->to($this->email1)->subject('Eticket 購票確認信');
+                }
+                if ($this->email2 != ''){
+                    $message->to($this->email2)->subject('Eticket 購票確認信');
+                }
+                if ($this->email3 != ''){
+                    $message->to($this->email3)->subject('Eticket 購票確認信');
+                }
+                if ($this->email4 != ''){
+                    $message->to($this->email4)->subject('Eticket 購票確認信');
+                }
+                // $message->to($this->email2)->subject('Eticket 購票確認信');
+                // $message->to($this->email3)->subject('Eticket 購票確認信');
+                // $message->to($this->email4)->subject('Eticket 購票確認信');
                 $message->from('wp405402508@im.fju.edu.tw', 'Eticket');
                 // echo "<button onclick=\"App.setBuyer()\">Set Buyer</button>";
                 echo "<script type=\"text/javascript\">alert(\"邀請寄送成功!\");</script>";
