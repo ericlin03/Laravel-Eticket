@@ -30,7 +30,7 @@
               <label for="content" class="col-md-4 col-form-label text-md-right">{{ __('公告內容') }}</label>
 
               <div class="col-md-6">
-                <textarea id="content" style=" height:100px;"
+                <textarea id="content" style="height:100%;width:100%"
                   class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" name='content'
                   value="{{ old('content') }}" required autofocus></textarea>
 

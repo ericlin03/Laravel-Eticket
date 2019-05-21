@@ -11,6 +11,8 @@
     {{csrf_field()}}
     <label for="receiver">電子錢包</label>
     <input id="receiver1" name="receiver1" type="text" placeholder="電子錢包" value="{{$wallet}}" />
+    {{-- <input style="display:none" id="receiver1" name="receiver1" type="text" placeholder="電子錢包" value="{{$identity}}"
+    /> --}}
     <br>
 
     <label for="receiver">電子錢包</label>

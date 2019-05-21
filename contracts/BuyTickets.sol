@@ -26,6 +26,7 @@ contract BuyTickets{
     for(uint i = 0; i < arr.length ; i++){
       theBuyer[arr[i]].email = email[i];
       theBuyer[arr[i]].status = status[i];
+      buyers++;
       buyerAccounts.push(arr[i]) - 1;
     }
     buyers = arr.length;
@@ -37,14 +38,15 @@ contract BuyTickets{
     /* require() */
     // require(msg.value == price); //making sure they are paying the right amount
     require(includes(buyerAccounts, msg.sender)); //making sure the account calling confirm is in the array
+    require(theBuyer[msg.sender].status != true);
     theBuyer[msg.sender].status = true; //set buyer status to true
     balance[msg.sender] += msg.value; //remember how many a buyer paid
     countConfirms++;
     if(countConfirms == buyerAccounts.length){ //if all the buyers had confirm, pay automatically
       buyTickets(buyers * _amount);
-
     }
   }
+  
 
   // cancel
   function cancel() public payable{
