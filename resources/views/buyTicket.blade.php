@@ -9,22 +9,22 @@
   <br>
   <form action="/send" method="post">
     {{csrf_field()}}
-    <label for="receiver">電子錢包</label>
-    <input id="receiver1" name="receiver1" type="text" placeholder="電子錢包" value="{{$wallet}}" />
-    {{-- <input style="display:none" id="receiver1" name="receiver1" type="text" placeholder="電子錢包" value="{{$identity}}"
+    <label for="receiver">身分證字號</label>
+    <input id="receiver1" name="receiver1" type="text" placeholder="身分證字號" value="{{$identity}}" />
+    {{-- <input style="display:none" id="receiver1" name="receiver1" type="text" placeholder="身分證字號" value="{{$identity}}"
     /> --}}
     <br>
 
-    <label for="receiver">電子錢包</label>
-    <input id="receiver2" name="receiver2" type="text" placeholder="電子錢包" />
+    <label for="receiver">身分證字號</label>
+    <input id="receiver2" name="receiver2" type="text" placeholder="身分證字號" />
     <br>
 
-    <label for="receiver">電子錢包</label>
-    <input id="receiver3" name="receiver3" type="text" placeholder="電子錢包" />
+    <label for="receiver">身分證字號</label>
+    <input id="receiver3" name="receiver3" type="text" placeholder="身分證字號" />
     <br>
 
-    <label for="receiver">電子錢包</label>
-    <input id="receiver4" name="receiver4" type="text" placeholder="電子錢包" />
+    <label for="receiver">身分證字號</label>
+    <input id="receiver4" name="receiver4" type="text" placeholder="身分證字號" />
 
     <button class="btn btn-outline-danger" onclick="App.setBuyer()" id="goBuyTicket">go buy ticket</button>
   </form>

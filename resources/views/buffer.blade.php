@@ -6,7 +6,6 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>MetaCoin | Truffle Webpack Demo w/ Frontend</title>
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <input type="text" name="rec" id="rec" value="{{$toPass}}" style="display:none">
 </head>
 <style>
   input {
@@ -17,8 +16,12 @@
 
 <body>
   <br><br><br><br>
-  <!-- <a id="rec" name="rec" value="{{$toPass}}" onclick="App.setBuyer()">{{$toPass}}</a> -->
   <h4>請稍候....</h4>
+  <input type="text" id="wallet1" value="{{$wallet1}}" style="display:none">
+  <input type="text" id="wallet2" value="{{$wallet2}}" style="display:none">
+  <input type="text" id="wallet3" value="{{$wallet3}}" style="display:none">
+  <input type="text" id="wallet4" value="{{$wallet4}}" style="display:none">
+
 </body>
 <script type="text/javascript">
   setTimeout(function() {

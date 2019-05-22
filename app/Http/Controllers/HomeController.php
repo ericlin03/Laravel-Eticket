@@ -368,14 +368,15 @@ class HomeController extends Controller
         $user = Auth::user();
         $wallet = $user->wallet;
         $ownerFromDB = DB::select('SELECT owner_id FROM program_seat WHERE owner_id!="" AND prog_name=:prog_name', ['prog_name' => "輔大音樂會"]);
-        // $identity = DB::select('SELECT identity FROM users WHERE ')
+        $identityFromQuery = DB::select('SELECT identity FROM users WHERE wallet =? ',[$wallet]);
+        $identity = $identityFromQuery[0]->identity;
         foreach ($ownerFromDB as $wal) {
             if ($wal->owner_id == $wallet) {
                 echo "<script type=\"text/javascript\">alert(\"您已有此表演的票了\");</script>";
                 return redirect('home');
             }
         }
-        return view('/buyTicket', compact('wallet'));
+        return view('/buyTicket', compact('wallet','identity'));
     }
 
     //confirm blade

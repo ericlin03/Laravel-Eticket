@@ -102,8 +102,8 @@ Route::get('send', 'mailController@send');
 // Route::get('buffer', function () {
 //     return view('buffer');
 // });
-Route::get('buffer', 'mailController@passer');
-Route::redirect('buffer', 'home');
+Route::get('/buffer', 'mailController@passer');
+// Route::redirect('buffer', 'home');
 //test
 
 // backhome

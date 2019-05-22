@@ -107,8 +107,8 @@ const App = {
         try {
             const { setBuyer } = this.buyTickets.methods;
             for (let i = 1; i <= 4; i++) {
-                if ($(`#receiver${i}`).val() != "") {
-                    address.push($(`#receiver${i}`).val());
+                if ($(`#wallet${i}`).val() != "") {
+                    address.push($(`#wallet${i}`).val());
                     email.push("");
                     bool.push(false);
                 }
