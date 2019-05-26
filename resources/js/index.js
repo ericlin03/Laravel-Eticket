@@ -447,11 +447,23 @@ const App = {
     },
 
     // 儲值頁面
-    rate: async function() {
+    // rate: async function() {
+    //     try {
+    //         var rate = $("#amount").val();
+    //         platformCoin = rate / 20;
+    //         alert("將會獲得" + platformCoin + "平台幣");
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // },
+    checkDepositeStatus: async function() {
         try {
-            var rate = $("#amount").val();
-            platformCoin = rate / 20;
-            alert("將會獲得" + platformCoin + "平台幣");
+            var wallet = $("wallet").val();
+            if (wallet == this.account) {
+                checkStatus = true;
+            } else {
+                alert("請確認填寫錢包位址與檢查");
+            }
         } catch (error) {
             console.log(error);
         }
@@ -460,12 +472,12 @@ const App = {
     withdrawCoin: async function() {
         try {
             const { withdraw } = this.deposite.methods;
-            var wallet = $("#wallet").val();
-            var rate = $("#amount").val();
-            platformCoin = parseInt(rate);
+            var amount = $("#amount").val();
             // console.log(platformCoin);
-            if (wallet == this.account) {
-                await withdraw(platformCoin / 20).send({ from: this.account });
+            if (checkStatus == true) {
+                await withdraw(amount).send({ from: this.account });
+            } else {
+                alert("請確認填寫錢包位址與檢查");
             }
         } catch (error) {
             console.log(error);
@@ -499,6 +511,7 @@ const App = {
                 from: this.account,
                 value: web3.utils.toWei(platformCoin, "ether")
             });
+            checkStatus = false;
         } catch (error) {
             console.log(error);
         }

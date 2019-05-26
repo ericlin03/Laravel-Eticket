@@ -65,9 +65,6 @@
             <li class="nav-item active white">
               <a class="nav-link ecolor bcr" href="/problem">　常見問題　</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link ecolor" href="/withdraw">　儲值平台幣　</a>
-            </li>
           </ul>
 
           <!-- Right Side Of Navbar -->
@@ -105,6 +102,7 @@
                   {{ __('登出') }}
                 </a>
                 <a class="dropdown-item" href="/orders">個人訂單 <span class="sr-only">(current)</span></a>
+                <a class="dropdown-item" href="/withdraw">儲值平台幣 <span class="sr-only">(current)</span></a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
                 </form>

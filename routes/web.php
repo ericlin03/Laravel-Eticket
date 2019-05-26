@@ -30,7 +30,7 @@ Route::get('/problem',function(){
 Route::get('/clause',function(){
   return view('clause');
 });
-Route::get('/news', 'HomeController@post');
+Route::get('/news', 'Controller@post');
 
 Route::get('/order', 'HomeController@personalorder');
 
@@ -59,9 +59,9 @@ return view('resale-example');
 
 Route::get('/orders', 'HomeController@orders');
 
-Route::get('/programs', 'HomeController@programs');
+Route::get('/programs', 'Controller@programs');
 
-Route::get('/resale', 'HomeController@resaleList');
+Route::get('/resale', 'Controller@resaleList');
 
 Route::get('buyOneTicket', 'HomeController@buyOneTicket');
 

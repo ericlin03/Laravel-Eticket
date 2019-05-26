@@ -25,4 +25,22 @@ class Controller extends BaseController
         return view('welcome',compact('data','data2','data3','data4','data5','data6','data7','data8','post'));
         
     }
+
+    public function programs() {
+        $act = DB::select('select * from program');
+        return view('programs', compact('act'));
+    }
+
+    public function resaleList() {
+        $area = DB::select('select section, type, tick_seat, prog_name, prog_id, ticket_id, tick_price from program_seat where status=\'resale\'');
+        foreach($area as $p) {
+            $price = $p->tick_price * 1.05;
+        }
+        return view('resale',compact('area', 'price'));
+    }
+
+    public function post(){
+        $post = DB::select('select * from post');
+        return view('news', compact('post'));
+    }
 }

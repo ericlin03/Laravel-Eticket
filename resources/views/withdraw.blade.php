@@ -12,8 +12,6 @@
     <br>
     <h4>目前還有 <font id="total" style="color:red">?</font> 平台幣</h4>
     <br>
-    <h3 style="color:red">注意！平台幣：新台幣＝1：20</h3>
-    <br>
     <table class="table table-striped">
         <tr>
             <td><label>我的電子錢包位址：</label></td>
@@ -21,12 +19,13 @@
         </tr>
         <tr>
             <td><label>儲值金額：</label></td>
-            <td><input id="amount" name="amount" placeholder="單位：新台幣" /></td>
+            <td><input id="amount" name="amount" placeholder="" /></td>
         </tr>
         <tr>
             <td></td>
             <td>
-                <button class="btn btn-success" id="rate" name="rate" onclick="App.rate()">我會獲得多少平台幣？</button>
+                <button id="checkButton" onclick="App.checkDepositeStatus()"
+                    class="btn btn-outline-primary">檢查錢包</button>
                 <button class="btn btn-info" id="withdrawBtn" name="withdrawBtn"
                     onclick="App.withdrawCoin()">確認儲值</button>
             </td>

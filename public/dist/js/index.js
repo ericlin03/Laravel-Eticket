@@ -68825,19 +68825,32 @@ var App = {
     return searchTx;
   }(),
   // 儲值頁面
-  rate: function () {
-    var _rate = _asyncToGenerator(
+  // rate: async function() {
+  //     try {
+  //         var rate = $("#amount").val();
+  //         platformCoin = rate / 20;
+  //         alert("將會獲得" + platformCoin + "平台幣");
+  //     } catch (error) {
+  //         console.log(error);
+  //     }
+  // },
+  checkDepositeStatus: function () {
+    var _checkDepositeStatus = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee19() {
-      var rate;
+      var wallet;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee19$(_context19) {
         while (1) {
           switch (_context19.prev = _context19.next) {
             case 0:
               try {
-                rate = $("#amount").val();
-                platformCoin = rate / 20;
-                alert("將會獲得" + platformCoin + "平台幣");
+                wallet = $("wallet").val();
+
+                if (wallet == this.account) {
+                  _checkStatus = true;
+                } else {
+                  alert("請確認填寫錢包位址與檢查");
+                }
               } catch (error) {
                 console.log(error);
               }
@@ -68847,55 +68860,60 @@ var App = {
               return _context19.stop();
           }
         }
-      }, _callee19);
+      }, _callee19, this);
     }));
 
-    function rate() {
-      return _rate.apply(this, arguments);
+    function checkDepositeStatus() {
+      return _checkDepositeStatus.apply(this, arguments);
     }
 
-    return rate;
+    return checkDepositeStatus;
   }(),
   withdrawCoin: function () {
     var _withdrawCoin = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee20() {
-      var withdraw, wallet, rate;
+      var withdraw, amount;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee20$(_context20) {
         while (1) {
           switch (_context20.prev = _context20.next) {
             case 0:
               _context20.prev = 0;
               withdraw = this.deposite.methods.withdraw;
-              wallet = $("#wallet").val();
-              rate = $("#amount").val();
-              platformCoin = parseInt(rate); // console.log(platformCoin);
+              amount = $("#amount").val(); // console.log(platformCoin);
 
-              if (!(wallet == this.account)) {
+              if (!(_checkStatus == true)) {
                 _context20.next = 8;
                 break;
               }
 
-              _context20.next = 8;
-              return withdraw(platformCoin / 20).send({
+              _context20.next = 6;
+              return withdraw(amount).send({
                 from: this.account
               });
 
-            case 8:
-              _context20.next = 13;
+            case 6:
+              _context20.next = 9;
               break;
 
-            case 10:
-              _context20.prev = 10;
+            case 8:
+              alert("請確認填寫錢包位址與檢查");
+
+            case 9:
+              _context20.next = 14;
+              break;
+
+            case 11:
+              _context20.prev = 11;
               _context20.t0 = _context20["catch"](0);
               console.log(_context20.t0);
 
-            case 13:
+            case 14:
             case "end":
               return _context20.stop();
           }
         }
-      }, _callee20, this, [[0, 10]]);
+      }, _callee20, this, [[0, 11]]);
     }));
 
     function withdrawCoin() {
@@ -68941,20 +68959,21 @@ var App = {
               });
 
             case 7:
-              _context21.next = 12;
+              _checkStatus = false;
+              _context21.next = 13;
               break;
 
-            case 9:
-              _context21.prev = 9;
+            case 10:
+              _context21.prev = 10;
               _context21.t0 = _context21["catch"](0);
               console.log(_context21.t0);
 
-            case 12:
+            case 13:
             case "end":
               return _context21.stop();
           }
         }
-      }, _callee21, this, [[0, 9]]);
+      }, _callee21, this, [[0, 10]]);
     }));
 
     function depositeCoin() {

@@ -56,12 +56,6 @@ class HomeController extends Controller
 
     }
 
-    public function post(){
-        $this->middleware('auth');
-        $post = DB::select('select * from post');
-        return view('news', compact('post'));
-    }
-
     // public function pay2(){
     //     $this->middleware('auth');
     //     $user = Auth::user();
@@ -100,17 +94,6 @@ class HomeController extends Controller
         return view('order',compact('order'));
     }
 
-    public function resaleList() {
-        $this->middleware('auth');
-        $user = Auth::user();
-        $wallet = $user->wallet;
-        $area = DB::select('select section, type, tick_seat, prog_name, prog_id, ticket_id, tick_price from program_seat where status=\'resale\'');
-        foreach($area as $p) {
-            $price = $p->tick_price * 1.05;
-        }
-        return view('resale',compact('area', 'price'));
-    }
-
     // public function resale(){
     //     $this->middleware('auth');
     //     $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
@@ -146,14 +129,6 @@ class HomeController extends Controller
         $act = DB::select('select * from program where prog_id=:prog_id',['prog_id'=>8]);
         $area = DB::select('select * from program_seat where owner_id=?', [$wallet]);
         return view('orders',compact('act','area'));
-    }
-
-    public function programs() {
-        $this->middleware('auth');
-        $user = Auth::user();
-        $wallet = $user->wallet;
-        $act = DB::select('select * from program');
-        return view('programs', compact('act'));
     }
 
     public function buyOneTicket(Request $request) {
@@ -234,6 +209,13 @@ class HomeController extends Controller
         $prog_id = $request->input('prog_id');
         $act = DB::select('select * from program where prog_id=?',[$prog_id]);
         $area = DB::select('select tick_price, type, section from program_seat where ticket_id=?',[$ticket_id]);
+        $check = DB::select('SELECT owner_id FROM program_seat WHERE prog_id=?', [$prog_id]);
+        foreach($check as $checkStatus) {
+            if ($checkStatus->owner_id == $user->wallet) {
+                echo '<script>alert(\'您已擁有此票卷\');</script>';
+                return redirect()->back();
+            }
+        }
         foreach($area as $p) {
             $price = $p->tick_price * 1.05;
         }
