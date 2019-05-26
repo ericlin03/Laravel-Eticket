@@ -20,7 +20,7 @@
   <input type="text" id="wallet1" value="{{$wallet1}}" style="display:none">
   <input type="text" id="wallet2" value="{{$wallet2}}" style="display:none">
   <input type="text" id="wallet3" value="{{$wallet3}}" style="display:none">
-  <input type="text" id="wallet4" value="{{$wallet4}}" style="display:none">
+  {{-- <input type="text" id="wallet4" value="{{$wallet4}}" style="display:none"> --}}
 
 </body>
 <script type="text/javascript">

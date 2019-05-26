@@ -112,11 +112,13 @@ class mailController extends Controller
         $walletQuery1 = DB::table('users')->select('wallet')->where('identity', '=', $this->id1)->get();
         $walletQuery2 = DB::table('users')->select('wallet')->where('identity', '=', $this->id2)->get();
         $walletQuery3 = DB::table('users')->select('wallet')->where('identity', '=', $this->id3)->get();
-        $walletQuery4 = DB::table('users')->select('wallet')->where('identity', '=', $this->id4)->get();
+        // $walletQuery4 = DB::table('users')->select('wallet')->where('identity', '=', $this->id4)->get();
         $wallet1 = $walletQuery1[0]->wallet;
         $wallet2 = $walletQuery2[0]->wallet;
         $wallet3 = $walletQuery3[0]->wallet;
-        $wallet4 = $walletQuery4[0]->wallet;
-        return view('buffer',compact('wallet1', 'wallet2','wallet3','wallet4'));
+        // $wallet4 = $walletQuery4[0]->wallet;
+        return view('buffer',compact('wallet1', 'wallet2','wallet3'));
     }
 }
+
+//passer(), buffer.blade, index.js setBuyer()

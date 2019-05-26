@@ -106,7 +106,7 @@ const App = {
         let bool = [];
         try {
             const { setBuyer } = this.buyTickets.methods;
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 1; i <= 3; i++) {
                 if ($(`#wallet${i}`).val() != "") {
                     address.push($(`#wallet${i}`).val());
                     email.push("");
@@ -114,27 +114,6 @@ const App = {
                 }
             }
             console.log(address);
-            // if ($("#receiver1").val() != "") {
-            //     console.log($("#receiver1").val());
-            //     address.push($("#receiver1").val());
-            //     email.push("");
-            //     bool.push(false);
-            // }
-            // if ($("#receiver2").val() != "") {
-            //     address.push($("#receiver2").val());
-            //     email.push("");
-            //     bool.push(false);
-            // }
-            // if ($("#receiver3").val() != "") {
-            //     address.push($("#receiver3").val());
-            //     email.push("");
-            //     bool.push(false);
-            // }
-            // if ($("#receiver4").val() != "") {
-            //     address.push($("#receiver4").val());
-            //     email.push("");
-            //     bool.push(false);
-            // }
             await setBuyer(address, email, bool).send({
                 from: this.account
             });

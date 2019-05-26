@@ -560,6 +560,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+
 }
 
 @media (min-width: 576px) {
@@ -3008,6 +3009,41 @@ fieldset:disabled a.btn {
 .btn-outline-light:not(:disabled):not(.disabled):active:focus, .btn-outline-light:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-light.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
+}
+
+.btn-outline-dark2{
+  display: none;
+  color: #343a40;
+  background-color: transparent;
+  background-image: none;
+  border-color: #343a40;
+}
+
+.btn-outline-dark2:hover {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+}
+
+.btn-outline-dark2:focus, .btn-outline-dark2.focus {
+  box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+}
+
+.btn-outline-dark2.disabled, .btn-outline-dark2:disabled {
+  color: #343a40;
+  background-color: transparent;
+}
+
+.btn-outline-dark2:not(:disabled):not(.disabled):active, .btn-outline-dark2:not(:disabled):not(.disabled).active,
+.show > .btn-outline-dark2.dropdown-toggle {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+}
+
+.btn-outline-dark2:not(:disabled):not(.disabled):active:focus, .btn-outline-dark2:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-dark2.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
 }
 
 .btn-outline-dark {

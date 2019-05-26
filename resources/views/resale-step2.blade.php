@@ -1,6 +1,7 @@
 @extends('layouts.app2')
 @section('content')
 
+
 <div class="container mt-3">
   <div class="row top">
     <div class="col-12">
@@ -59,7 +60,7 @@
       <table class="table table-striped">
         <tr class="table-info">
           <td>原本金額：</td>
-          <td>{{ $orginalPrice }}</td>
+          <td id="amount">{{ $orginalPrice }}</td>
         </tr>
         <tr class="table-info">
           <td>手續費：</td>
@@ -67,7 +68,7 @@
         </tr>
         <tr class="table-warning">
           <td>總金額：</td>
-          <td id="amount">{{ $price }}</td>
+          <td>{{ $price }}</td>
         </tr>
         <tr class="table-danger">
           <td>付款錢包地址：</td>
@@ -86,14 +87,17 @@
           </ul>
         </div>
         @endif
-        <button id="checkButton" onclick="App.checkResaleStatus()" class="btn btn-outline-primary">檢查錢包</button>
-        <button id="setAmount" onclick="App.setAmount()" class="btn btn-outline-warning">確認金額</button>
-        <button id="setSeller" onclick="App.setSeller()" class="btn btn-outline-success">確認賣家</button>
+        <button id="checkButton" onclick="App.checkResaleStatus();step1()" class="btn btn-outline-primary">檢查錢包</button>
+        <button id="setAmount" onclick="App.setAmount();step2()" class="btn btn-outline-warning"
+          style="display: none">確認金額</button>
+        <button id="setSeller" onclick="App.setSeller();step3()" class="btn btn-outline-success"
+          style="display: none">確認賣家</button>
         <!-- <button class="btn btn-outline-danger" onclick="App.transfer();App.jumpToResaleStep3()">確認付款</button> -->
 
         <form method="post" action="changeOwner">
           {{csrf_field()}}
-          <button id="submitButton" type="submit" onclick="App.transfer()" class="btn btn-outline-danger">確認付款</button>
+          <button id="submitButton" type="submit" style="display: none" onclick="App.transfer();step4()"
+            class="btn btn-outline-danger">確認付款</button>
           <input type="text" name="ticket_id" value="{{ $ticket_id }}" style="display:none" />
           <input type="text" name="prog_id" value="{{ $prog_id }}" style="display:none" />
         </form>
@@ -106,27 +110,39 @@
     </div>
   </div>
 </div>
-
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#submitButton").hide();
-    $("#setAmount").hide();
-    $("#setSeller").hide();
+  function step1(){
+    let a = document.getElementById('checkButton');
+    let b = document.getElementById('setAmount');
+    if(b.style.display === 'none'){
+      b.style.display = 'block'
+      // a.style.display = 'none'
+    }
+  }
+  function step2(){
+    let b = document.getElementById('setAmount');
+    let c = document.getElementById('setSeller');
+    if(c.style.display === 'none'){
+      c.style.display = 'block'
+      b.style.display = 'none'
+    }
+  }
+  function step3() {
+    let c = document.getElementById('setSeller');
+    let d = document.getElementById('submitButton');
+    if(d.style.display === 'none'){
+      d.style.display = 'block'
+      c.style.display = 'none'
+    }
+  }
+  // function step4(){
+  //   let d = document.getElementById('submitButton');
 
-    // $("#checkButton").click(function(){
-    //   $("#checkButton").hide();
-    //   $("#setAmount").show();
-    // });
+  // }
+  
 
-    $("#setAmount").click(function(){
-      $("#setAmount").hide();
-      $("#setSeller").show();
-    });
 
-    $("#setSeller").click(function(){
-      $("#setSeller").hide();
-      $("#submitButton").show();
-    });
-  });
+
+
 </script>
 @endsection
