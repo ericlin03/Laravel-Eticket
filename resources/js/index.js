@@ -458,9 +458,10 @@ const App = {
     // },
     checkDepositeStatus: async function() {
         try {
-            var wallet = $("wallet").val();
+            var wallet = $("#wallet").val();
             if (wallet == this.account) {
                 checkStatus = true;
+                alert("錢包位址正確！");
             } else {
                 alert("請確認填寫錢包位址與檢查");
             }
@@ -522,7 +523,7 @@ const App = {
             const { web3 } = this;
             var total;
             web3.eth.getBalance(
-                "0xa6F5226C98668E944a0DD1551da9ac0BB2E4bB3B",
+                "0x65DB1208772Ed41AbD16DE52d9C3b6D61F95113F",
                 "latest",
                 function(err, result) {
                     if (!err) {

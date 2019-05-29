@@ -36,8 +36,8 @@ contract Resale {
     function transfer() public payable {
         // require(msg.sender == buyer);
         // require(msg.value == originalPrice * 105 / 100);
-        seller.transfer(originalPrice);
-        // platform.transfer(originalPrice);
+        seller.transfer(originalPrice * 95 / 100);
+        platform.transfer(originalPrice * 10 / 100);
     }
 }
 

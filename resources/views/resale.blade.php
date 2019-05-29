@@ -51,7 +51,7 @@
                 <font color="black">{{ $resale->tick_seat }}
               </td>
               <td>
-                <font color="black">{{ $price }}
+                <font color="black">{{ $resale->tick_price * 1.05 }}
               </td>
             <tr>
             <tr align="center">
