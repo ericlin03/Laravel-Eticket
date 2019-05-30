@@ -209,9 +209,9 @@ class HomeController extends Controller
         $prog_id = $request->input('prog_id');
         $act = DB::select('select * from program where prog_id=?',[$prog_id]);
         $area = DB::select('select tick_price, type, section from program_seat where ticket_id=?',[$ticket_id]);
-        $check = DB::select('SELECT owner_id FROM program_seat WHERE prog_id=?', [$prog_id]);
+        $check = DB::select('SELECT owner_id, status FROM program_seat WHERE prog_id=?', [$prog_id]);
         foreach($check as $checkStatus) {
-            if ($checkStatus->owner_id == $user->wallet) {
+            if ($checkStatus->owner_id == $user->wallet && $checkStatus->status == 'sold') {
                 echo '<script>alert(\'您已擁有此票卷\');</script>';
                 return redirect()->back();
             }
