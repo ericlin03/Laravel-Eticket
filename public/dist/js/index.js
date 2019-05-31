@@ -68503,7 +68503,7 @@ var App = {
               if (this.account == $("#wallet").text()) {
                 _checkStatus = true;
                 alert("錢包位址正確");
-                $("#setAmount").show(); // var status = confirm('確定要購買此二手票卷嗎？');
+                $("#setAmount").show(); // var status = confirm('確定要購買此二手票券嗎？');
                 // if (status == true) {
                 //   this.setAmount();
                 //   this.setSeller();
@@ -68517,7 +68517,7 @@ var App = {
                 console.log(this.account);
                 alert("錢包地址與個人資料不相符，請確認MetaMask帳號與付款地址相同，確認完後請重新整理。");
               } // if (checkStatus == true) {
-              //   var status = confirm('錢包位址正確，確定要購買此二手票卷嗎？');
+              //   var status = confirm('錢包位址正確，確定要購買此二手票券嗎？');
               //   if (status == true) {
               //     this.setAmount();
               //     var statusSeller = confirm('請先在MetaMask中按下CONFIRM，此步驟是設定金額');

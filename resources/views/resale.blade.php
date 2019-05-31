@@ -4,7 +4,7 @@
 <div class="container mt-3">
   <div class="row top">
     <div class="col-12">
-      <h1><strong>二手票卷</strong></h1>
+      <h1><strong>二手票券</strong></h1>
     </div>
   </div>
 </div>
@@ -12,7 +12,7 @@
 <div class="container">
   @empty($area)
   <div><br><br><br>
-    <h3 style="color:red">目前暫時無人售出二手票卷，請稍後再試。</h3><br><br><br>
+    <h3 style="color:red">目前暫時無人售出二手票券，請稍後再試。</h3><br><br><br>
   </div>
   @endempty
   @foreach($area as $resale)

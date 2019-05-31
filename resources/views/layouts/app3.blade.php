@@ -27,6 +27,8 @@
     <script src="js/main.js"></script>
     <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
     <link href="test.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/favicon.ico"/>
+<link rel="bookmark" href="/favicon.ico"/>
 
 </head>
 

@@ -141,7 +141,7 @@ class HomeController extends Controller
         $check = DB::select('SELECT owner_id FROM program_seat WHERE prog_name=?', [$progName]);
         foreach($check as $checkStatus) {
             if ($checkStatus->owner_id == $user->wallet) {
-                echo '<script>alert(\'您已擁有此票卷\');</script>';
+                echo '<script>alert(\'您已擁有此票券\');</script>';
                 return redirect()->back();
             }
         }
@@ -212,7 +212,7 @@ class HomeController extends Controller
         $check = DB::select('SELECT owner_id, status FROM program_seat WHERE prog_id=?', [$prog_id]);
         foreach($check as $checkStatus) {
             if ($checkStatus->owner_id == $user->wallet && $checkStatus->status == 'sold') {
-                echo '<script>alert(\'您已擁有此票卷\');</script>';
+                echo '<script>alert(\'您已擁有此票券\');</script>';
                 return redirect()->back();
             }
         }
@@ -290,7 +290,7 @@ class HomeController extends Controller
         DB::table('program_seat')->where('ticket_id', $ticket_id)->update(['status' => 'resale']);
         echo ("<script LANGUAGE='JavaScript'>
           window.location.replace('./orders');
-          window.alert('此票卷已發佈到二手票卷中！');
+          window.alert('此票券已發佈到二手票券中！');
         </script>");
     }
 

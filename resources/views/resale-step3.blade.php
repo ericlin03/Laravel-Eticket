@@ -12,7 +12,7 @@
 <div class="container">
   <ul class="nav nav-tabs nav-justified" style="margin-top:20px;">
     <li class="col-4">
-      <a class="nav-link" data-toggle="tab" href="#home">確認票卷</a>
+      <a class="nav-link" data-toggle="tab" href="#home">確認票券</a>
     </li>
     <li class="col-4">
       <a class="nav-link" data-toggle="tab" href="#menu1">付款方式</a>
@@ -79,7 +79,7 @@
       <br><br>
       <h3><strong>在 MetaMask 按下 'CONFIRM' 就完成付款囉！</strong></h3>
       <br>
-      <h5>處理過程中需要等待，付款完成後票卷資訊會顯示在個人訂單中</h5>
+      <h5>處理過程中需要等待，付款完成後票券資訊會顯示在個人訂單中</h5>
       <br>
       <hr>
       <div align="center"><button class="btn btn-outline-info"

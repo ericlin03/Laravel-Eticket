@@ -37,7 +37,7 @@
                 <font color="black">座位
               </th>
               <th>
-                <font color="black">票卷狀態
+                <font color="black">票券狀態
               </th>
               <th>
                 @if($order->status == 'sold')
@@ -72,7 +72,7 @@
           </table>
           @if($order->status == 'sold')
           <form method="get" action="resaleProcess">
-            <button type="submit" class="btn btn-outline-light">轉售此票卷</button>
+            <button type="submit" class="btn btn-outline-light">轉售此票券</button>
             <input type="text" name="ticket_id" style="display:none" value="{{ $order->ticket_id }}" />
             <input type="text" name="prog_id" style="display:none" value="{{ $order->prog_id }}" />
           </form>

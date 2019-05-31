@@ -12,7 +12,7 @@
 <div class="container">
   <ul class="nav nav-tabs nav-justified" style="margin-top:20px;">
     <li class="active col-4">
-      <a class="nav-link active" data-toggle="tab" href="#home">確認票卷</a>
+      <a class="nav-link active" data-toggle="tab" href="#home">確認票券</a>
     </li>
     <li class="col-4">
       <a class="nav-link disabled" data-toggle="tab" href="#menu1">付款方式</a>

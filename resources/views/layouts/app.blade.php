@@ -22,13 +22,16 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="css/bootstrap-4.0.0.css" rel="stylesheet">
   <link href="test.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="bookmark" href="/favicon.ico" />
 
 
 </head>
 
 <body>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #5F9EA0">
+    <nav class="navbar navbar-expand-md navbar-light navbar-laravel fixed-top">
+      {{-- <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #5F9EA0"> --}}
       <div class="container">
         @if($user = Auth::user())
         <a class="navbar-brand" href="{{ url('/home') }}">
@@ -38,6 +41,7 @@
         <a class="navbar-brand" href="{{ url('/') }}">
           {{ config('app.name', 'ETicket') }}
         </a>
+        {{-- <a href="{{ url('/') }}" width="10%"><img src="img/logo.png" width="8%" /></a> --}}
         @endif
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -47,13 +51,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Left Side Of Navbar -->
           <ul class="navbar-nav mr-auto">
-            <form class="form-inline my-2 my-lg-0">
+            {{-- <form class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="請輸入活動關鍵字.." aria-label="Search">
               <button class="btn btn-outline-primary my-2 my-sm-0 btn-sm" type="submit"><img src="images/search.png"
                   width="30" height="30" class="d-inline-block align-top" alt=""></button>
-            </form>
+            </form> --}}
             <li class="nav-item active">
-              <a class="nav-link ecolor bcl bcr" href="{{ url('programs') }}">　所有活動　<span
+              <a class="nav-link ecolor bcr" href="{{ url('programs') }}">　所有活動　<span
                   class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
@@ -143,7 +147,7 @@
           <li class="nav-item col-2 col-md-2 col-lg-2">
           </li>
           <li class="nav-item col-2 col-md-2 col-lg-2">
-            <a class="nav-link" href="">購票流程說明</a>
+            <a class="nav-link" href="https://youtu.be/xtRaNr6Z-9E">購票流程說明</a>
           </li>
           <li class="nav-item col-2 col-md-2 col-lg-2">
             <a class="nav-link" href="{{url('clause')}}">服務條款</a>
