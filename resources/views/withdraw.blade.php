@@ -10,8 +10,8 @@
 
 <div class="container">
     <br>
-    <h4>目前還有 <font id="total" style="color:red">?</font> 平台幣</h4>
-    <br>
+    {{-- <h4>目前還有 <font id="total" style="color:red">?</font> 平台幣</h4> --}}
+    {{-- <br> --}}
     <table class="table table-striped">
         <tr>
             <td><label>我的電子錢包位址：</label></td>

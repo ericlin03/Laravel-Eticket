@@ -2360,12 +2360,12 @@
     "15": {
       "events": {},
       "links": {},
-      "address": "0x793033e10266eAC72043f9bE879aCdeE0820F081",
-      "transactionHash": "0x33d008ea7be4f2f7bd9982d5b0862bfba886ba3d4f38999ab2627bb0715e932d"
+      "address": "0x2cC5B30Cb1F51ceBafcc6688c6748d3dFFc79D1f",
+      "transactionHash": "0x0086bd893b1696856d5b99b9bb4a950e31c5891dec6d0b5297f6025e434f853d"
     }
   },
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-05-27T15:58:27.103Z",
+  "updatedAt": "2019-06-01T00:22:11.043Z",
   "devdoc": {
     "methods": {}
   },
