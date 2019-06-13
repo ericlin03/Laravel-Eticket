@@ -2,7 +2,7 @@ pragma solidity >=0.4.21 <0.6.0;
 pragma experimental ABIEncoderV2;
 
 contract BuyTickets{
-  address payable public owner = 0x4190C332e7D40bF2E7A370Bbc836F5b8832CB326;
+  address payable public owner = 0x4190C332e7D40bF2E7A370Bbc836F5b8832CB326; //平台帳號，永遠固定
   uint buyers = 0;
   address[] public buyerAccounts;
   uint price;

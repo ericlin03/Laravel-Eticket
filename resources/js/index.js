@@ -523,7 +523,7 @@ const App = {
             const { web3 } = this;
             var total;
             web3.eth.getBalance(
-                "0x65DB1208772Ed41AbD16DE52d9C3b6D61F95113F",
+                "0x65DB1208772Ed41AbD16DE52d9C3b6D61F95113F", //平台幣合約，永遠固定
                 "latest",
                 function(err, result) {
                     if (!err) {

@@ -4,7 +4,7 @@ contract Resale {
     
     address payable seller;
     address payable buyer;
-    address payable public platform = 0x4190C332e7D40bF2E7A370Bbc836F5b8832CB326;
+    address payable public platform = 0x4190C332e7D40bF2E7A370Bbc836F5b8832CB326; //平台帳號，永遠固定
     uint originalPrice;
 
     constructor() public {

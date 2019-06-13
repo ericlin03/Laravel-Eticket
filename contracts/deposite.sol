@@ -1,7 +1,7 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 contract Deposite {
-    address payable public platform = 0x724091f781a3b0690E35f5Ac7e9601cfeE25c0eD;
+    address payable public platform = 0x724091f781a3b0690E35f5Ac7e9601cfeE25c0eD; //平台帳號，永遠固定
     address payable buyer;
 
     constructor() public {
