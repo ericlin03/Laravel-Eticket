@@ -21,6 +21,6 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
-        "truffle": "^5.0.12"
+        "truffle": "^5.7.8"
     }
 }
